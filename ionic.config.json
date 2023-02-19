@@ -1,0 +1,7 @@
+{
+  "name": "TaskAideApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
