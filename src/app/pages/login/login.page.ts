@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-
-interface Login {
-  email: string,
-  password: string
-}
+import { Router } from '@angular/router';
+import { first } from 'rxjs';
+import { AuthService } from 'src/app/services/auth.service';
+import { Login } from '../../models/auth/Login';
 
 @Component({
   selector: 'app-login',
@@ -15,15 +14,27 @@ export class LoginPage implements OnInit {
     email: '',
     password: ''
   };
+  error = '';
   submitted: boolean = false;
-  constructor() { }
+
+  constructor(
+    private router: Router,
+    private authService: AuthService
+  ) { }
 
   ngOnInit() {
   }
 
   logInWithCredentials() {
-    this.submitted = true
-    console.log(this.login);
+    this.authService.login(this.login).pipe(first())
+      .subscribe({
+        next: () => {
+          this.router.navigate(['/']);
+        },
+        error: error => {
+          this.error = error.error;
+        }
+      })
   }
 
 }

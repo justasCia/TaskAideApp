@@ -1,13 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
-interface Register {
-  firstName: string,
-  lastname: string,
-  email: string,
-  phoneNumber: string,
-  password: string,
-  repeatPassword: string
-}
+import { AuthService } from 'src/app/services/auth.service';
+import { Register } from '../../models/auth/Register';
 
 @Component({
   selector: 'app-register',
@@ -21,15 +14,19 @@ export class RegisterPage implements OnInit {
     email: '',
     phoneNumber: '',
     password: '',
-    repeatPassword: ''
+    //repeatPassword: ''
   }
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
   }
 
   registerWithCredentials() {
-    console.log(this.register);
+    this.authService.register(this.register).subscribe(response => {
+      console.log(response);
+    }, (error: any) => {
+      console.log(error.error);
+    })
   }
 
 }

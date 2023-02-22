@@ -27,6 +27,11 @@
                     <ion-button type="submit" color="primary" size="full">Prisijungti</ion-button>
                   </ion-col>
                 </ion-row>
+                <ion-row *ngIf="error" class="ion-justify-content-center">
+                  <ion-col sizeLg="6">
+                    <div>{{error}}</div>
+                  </ion-col>
+                </ion-row>
                 <ion-row class="ion-justify-content-center">
                   <p>Arba prisijunkite su:</p>
                 </ion-row>
