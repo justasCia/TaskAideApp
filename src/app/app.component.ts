@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject, map, Observable, tap } from 'rxjs';
+import { Component } from '@angular/core';
 import { User } from './models/auth/User';
 import { AuthService } from './services/auth.service';
 @Component({
@@ -8,19 +7,15 @@ import { AuthService } from './services/auth.service';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  isLoggedIn: Observable<boolean>;
   user: User | null = null;
   public appPages = [
-    { title: 'Inbox', url: '/folder/Inbox', icon: 'mail' },
-    { title: 'Outbox', url: '/folder/Outbox', icon: 'paper-plane' },
-    { title: 'Favorites', url: '/folder/Favorites', icon: 'heart' },
-    { title: 'Archived', url: '/folder/Archived', icon: 'archive' },
-    { title: 'Trash', url: '/folder/Trash', icon: 'trash' },
-    { title: 'Spam', url: '/folder/Spam', icon: 'warning' },
+    { title: 'Darbastalis', url: '/folder/Darbastalis', icon: 'apps' },
+    { title: 'Paslaugos', url: '/folder/Paslaugos', icon: 'list' },
+    { title: 'Darbai', url: '/folder/Darbai', icon: 'calendar' },
+    { title: 'Sąskaitos', url: '/folder/Sąskaitos', icon: 'barcode' },
   ];
   public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
   constructor(private authService: AuthService) {
-    this.isLoggedIn = this.authService.isLoggedIn;
     this.authService.user.subscribe(user => {
       this.user = user;
     });

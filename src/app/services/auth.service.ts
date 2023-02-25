@@ -1,4 +1,3 @@
-import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, map, Observable, tap } from 'rxjs';
@@ -13,24 +12,22 @@ import { ApiService } from './api.service';
 export class AuthService {
   private _user: BehaviorSubject<User | null>;
   public user: Observable<User | null>;
-  private _isLoggedIn: BehaviorSubject<boolean>;
-  isLoggedIn: Observable<boolean>;
 
   constructor(
     private router: Router,
     private apiService: ApiService
   ) {
-    const cachedUser = localStorage.getItem("user");
     this._user = new BehaviorSubject<User | null>(null);
     this.user = this._user.asObservable();
-    this._isLoggedIn = new BehaviorSubject<boolean>(false);
-    this.isLoggedIn = this._isLoggedIn.asObservable();
+    
+    const cachedUser = localStorage.getItem("user");
     if (cachedUser !== null) {
       const user = new User();
       Object.assign(user, JSON.parse(cachedUser));
       this._user.next(user);
-      this._isLoggedIn.next(true);
-      this.refreshToken().subscribe();
+      if(!user.expires || new Date(user.expires) < new Date()) {
+        this.refreshToken().subscribe();
+      }
     }
   }
 
@@ -48,7 +45,6 @@ export class AuthService {
         const userFromResponse = this.GetUserFromResponse(response);
 
         this._user.next(userFromResponse);
-        this._isLoggedIn.next(true);
         localStorage.setItem("user", JSON.stringify(this.userValue));
 
         this.startRefreshTokenTimer();
@@ -63,7 +59,6 @@ export class AuthService {
         const userFromResponse = this.GetUserFromResponse(response);
 
         this._user.next(userFromResponse);
-        this._isLoggedIn.next(true);
         localStorage.setItem("user", JSON.stringify(this.userValue));
 
         this.startRefreshTokenTimer();
@@ -73,15 +68,19 @@ export class AuthService {
   }
 
   logout() {
-    this.apiService.post("auth/revokeToken", {}).subscribe();
+    if (this.userValue) {
+      this.apiService.post("auth/revokeToken", {}).subscribe();
+    }
     this.stopRefreshTokenTimer();
     this._user.next(null);
+    localStorage.clear();
     this.router.navigate(['/login']);
   }
 
   private GetUserFromResponse(response: any) {
     const user: User = new User();
     const jwtToken = JSON.parse(atob(response.accessToken.split('.')[1]));
+    jwtToken.expires = new Date(jwtToken.exp * 1000);
     Object.assign(user, jwtToken);
     user.accessToken = response.accessToken;
     return user;

@@ -1,27 +1,13 @@
 <ion-app>
   <ion-split-pane contentId="main-content">
-    <ion-menu *ngIf="isLoggedIn | async" contentId="main-content" type="overlay">
+    <ion-menu *ngIf="user" contentId="main-content" type="overlay">
       <ion-content>
-        <ion-list id="inbox-list">
-          <ion-list-header>{{user?.firstName}} {{user?.lastName}}</ion-list-header>
-          <ion-note>{{user?.email}}</ion-note>
-          <ion-note>{{user?.role}}</ion-note>
-
-          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
-            <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
-              <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
-              <ion-label>{{ p.title }}</ion-label>
-            </ion-item>
-          </ion-menu-toggle>
-        </ion-list>
-
-        <ion-list id="labels-list">
-          <ion-list-header>Labels</ion-list-header>
-
-          <ion-item *ngFor="let label of labels" lines="none">
-            <ion-icon slot="start" ios="bookmark-outline" md="bookmark-sharp"></ion-icon>
-            <ion-label>{{ label }}</ion-label>
-          </ion-item>
+        <ion-header>
+          <app-user-profile-sidebar [user]="user"></app-user-profile-sidebar>
+        </ion-header>
+        <ion-list [ngSwitch]="user.role">
+          <app-client-sidebar-list *ngSwitchCase="'Client'"></app-client-sidebar-list>
+          <app-worker-sidebar-list *ngSwitchCase="'Worker'"></app-worker-sidebar-list>
         </ion-list>
       </ion-content>
     </ion-menu>
