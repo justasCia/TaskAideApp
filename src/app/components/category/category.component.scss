@@ -1,0 +1,25 @@
+ion-card {
+  width: 270px;
+  height: 180px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition: transform 0.3s ease-out;
+  color: #fff;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
+  padding: 20px;
+}
+
+ion-card:hover {
+  transform: scale(1.05);
+  box-shadow: 2px rgba(0, 0, 0, 0.2);
+}
+
+ion-card:active {
+  transform: scale(0.95);
+  box-shadow: none
+}

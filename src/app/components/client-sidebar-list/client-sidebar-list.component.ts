@@ -13,6 +13,7 @@ export class ClientSidebarListComponent implements OnInit {
     { title: 'Paslaugos', url: '/folder/Paslaugos', icon: 'list' },
     { title: 'Darbai', url: '/folder/Darbai', icon: 'calendar' },
     { title: 'Sąskaitos', url: '/folder/Sąskaitos', icon: 'barcode' },
+    { title: 'Kategorijos', url: '/categories', icon: 'folder-open' },
   ];
   constructor() { }
 

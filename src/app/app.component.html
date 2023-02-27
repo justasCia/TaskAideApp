@@ -6,8 +6,10 @@
           <app-user-profile-sidebar [user]="user"></app-user-profile-sidebar>
         </ion-header>
         <ion-list [ngSwitch]="user.role">
-          <app-client-sidebar-list *ngSwitchCase="'Client'"></app-client-sidebar-list>
-          <app-worker-sidebar-list *ngSwitchCase="'Worker'"></app-worker-sidebar-list>
+          <ion-menu-toggle auto-hide="false">
+            <app-client-sidebar-list *ngSwitchCase="'Client'"></app-client-sidebar-list>
+            <app-worker-sidebar-list *ngSwitchCase="'Provider'"></app-worker-sidebar-list>
+          </ion-menu-toggle>
         </ion-list>
       </ion-content>
     </ion-menu>
