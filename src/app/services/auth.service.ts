@@ -48,7 +48,7 @@ export class AuthService {
         localStorage.setItem("user", JSON.stringify(this.userValue));
 
         this.startRefreshTokenTimer();
-        return this.user;
+        return response;
       })
     );
   }
@@ -62,7 +62,7 @@ export class AuthService {
         localStorage.setItem("user", JSON.stringify(this.userValue));
 
         this.startRefreshTokenTimer();
-        return this.user;
+        return response;
       })
     )
   }

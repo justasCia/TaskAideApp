@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import Category from 'src/app/models/services/Category';
 
 @Component({
@@ -8,12 +9,12 @@ import Category from 'src/app/models/services/Category';
 })
 export class CategoryComponent implements OnInit {
   @Input() category: Category;
-  constructor() { }
+  constructor(private router: Router) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   click() {
-    console.log(this.category);
+    this.router.navigate([`categories/${this.category.id}/services`]);
   }
 
 }

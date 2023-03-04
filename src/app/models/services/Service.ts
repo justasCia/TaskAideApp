@@ -1,3 +1,4 @@
 export default interface Service {
-    id: number
+    id: number,
+    name: string
 }

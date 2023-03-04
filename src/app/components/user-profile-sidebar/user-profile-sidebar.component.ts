@@ -6,10 +6,16 @@ import { User } from 'src/app/models/auth/User';
   templateUrl: './user-profile-sidebar.component.html',
   styleUrls: ['./user-profile-sidebar.component.scss'],
 })
-export class UserProfileSidebarComponent implements OnInit {
+export class UserProfileSidebarComponent {
   @Input() user: User;
+
+  isDropdownOpen = false;
+  dropdownIcon = 'chevron-down-outline';
+
   constructor() { }
 
-  ngOnInit() {}
-
+  toggleDropdown() {
+    this.isDropdownOpen = !this.isDropdownOpen;
+    this.dropdownIcon = this.isDropdownOpen ? 'arrow-up' : 'arrow-down';
+  }
 }
