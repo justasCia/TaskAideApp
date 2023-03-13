@@ -1,0 +1,19 @@
+<ion-list>
+  <ion-item>
+    <ion-label position="stacked">Location</ion-label>
+    <ion-input [(ngModel)]="location" required></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="stacked">Preferred Date</ion-label>
+    <ion-datetime displayFormat="MMM DD, YYYY" [(ngModel)]="preferredDate"></ion-datetime>
+  </ion-item>
+  <ion-item>
+    <ion-label position="stacked">Additional Information</ion-label>
+    <ion-textarea [(ngModel)]="additionalInfo"></ion-textarea>
+  </ion-item>
+  <ion-item>
+    <ion-label position="stacked">Pictures</ion-label>
+    <ion-input type="file" accept="image/*" (change)="onPictureSelect($event)" multiple></ion-input>
+  </ion-item>
+</ion-list>
+<ion-button expand="block" (click)="submit()">Toliau</ion-button>

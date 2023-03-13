@@ -5,6 +5,7 @@ import { User } from '../models/auth/User';
 import { Login } from "../models/auth/Login";
 import { Register } from "../models/auth/Register";
 import { ApiService } from './api.service';
+import { toByteArray } from 'base64-js';
 
 @Injectable({
   providedIn: 'root'
@@ -79,7 +80,8 @@ export class AuthService {
 
   private GetUserFromResponse(response: any) {
     const user: User = new User();
-    const jwtToken = JSON.parse(atob(response.accessToken.split('.')[1]));
+    const payload = response.accessToken.split('.')[1];
+    const jwtToken = JSON.parse(new TextDecoder().decode(toByteArray(payload)));
     jwtToken.expires = new Date(jwtToken.exp * 1000);
     Object.assign(user, jwtToken);
     user.accessToken = response.accessToken;
@@ -91,7 +93,7 @@ export class AuthService {
   private startRefreshTokenTimer() {
     // parse json object from base64 encoded jwt token
     const jwtBase64 = this.userValue!.accessToken!.split('.')[1];
-    const jwtToken = JSON.parse(atob(jwtBase64));
+    const jwtToken = JSON.parse(new TextDecoder().decode(toByteArray(jwtBase64)));
 
     // set a timeout to refresh the token a minute before it expires
     const expires = new Date(jwtToken.exp * 1000);

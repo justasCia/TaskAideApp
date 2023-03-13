@@ -1,0 +1,20 @@
+<ion-content>
+  <ng-container *ngIf="orderFormService.step === 1">
+    <app-category-selection (categorySelected)="selectCategory($event)"></app-category-selection>
+  </ng-container>
+  <ng-container *ngIf="orderFormService.step === 2">
+    <app-services-selection [selectedCategory]="orderFormService.selectedCategory"
+      (servicesSelected)="selectServices($event)"></app-services-selection>
+  </ng-container>
+  <ng-container *ngIf="orderFormService.step === 3">
+    <app-additional-info-selection (infoSubmitted)="submitInfo($event)"></app-additional-info-selection>
+  </ng-container>
+  <ng-container *ngIf="orderFormService.step === 4">
+    <app-provider-selection></app-provider-selection>
+    <ion-button expand="block" color="danger">Užsakyti</ion-button>
+  </ng-container>
+
+  <ng-container *ngIf="orderFormService.step > 1 && orderFormService.step !== 4">
+    <ion-button expand="block" color="danger" (click)="previousStep()">Atgal</ion-button>
+  </ng-container>
+</ion-content>

@@ -15,13 +15,14 @@ import { UserProfileSidebarComponent } from './components/user-profile-sidebar/u
 import { WorkerSidebarListComponent } from './components/worker-sidebar-list/worker-sidebar-list.component';
 import { ClientSidebarListComponent } from './components/client-sidebar-list/client-sidebar-list.component';
 import { ApiService } from './services/api.service';
+import { OrderFormComponent } from './components/order-form/order-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserProfileSidebarComponent,
     WorkerSidebarListComponent,
-    ClientSidebarListComponent
+    ClientSidebarListComponent,
   ],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule],
   providers: [

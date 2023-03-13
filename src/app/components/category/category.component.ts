@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import Category from 'src/app/models/services/Category';
 
@@ -9,12 +9,8 @@ import Category from 'src/app/models/services/Category';
 })
 export class CategoryComponent implements OnInit {
   @Input() category: Category;
+  @Output() click = new EventEmitter<Category>();
   constructor(private router: Router) { }
 
   ngOnInit() { }
-
-  click() {
-    this.router.navigate([`categories/${this.category.id}/services`]);
-  }
-
 }

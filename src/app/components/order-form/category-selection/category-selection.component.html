@@ -1,0 +1,7 @@
+<ion-grid>
+  <ion-row class="ion-justify-content-start ion-align-items-center">
+    <ion-col sizeSm="6" sizeMd="6" sizeLg="4" sizeXl="3" *ngFor="let category of categories">
+      <app-category class="ion-justify-content-center" [category]="category" (click)="selectCategory(category)"></app-category>
+    </ion-col>
+  </ion-row>
+</ion-grid>
