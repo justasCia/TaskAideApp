@@ -40,6 +40,10 @@ export class AuthService {
     return this.apiService.post("auth/register", register);
   }
 
+  registerProvider(register: Register) {
+    return this.apiService.post("auth/registerProvider", register);
+  }
+
   login(login: Login) {
     return this.apiService.post("auth/signin", login).pipe(
       tap(response => {

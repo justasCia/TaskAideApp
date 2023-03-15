@@ -1,0 +1,60 @@
+<ion-content>
+  <div class="flex-center">
+    <ion-grid>
+      <ion-row class="ion-justify-content-center">
+        <h1>TaskAide</h1>
+      </ion-row>
+      <ion-row class="ion-justify-content-center">
+        <ion-col sizeLg="5" sizeMd="8">
+          <ion-card>
+            <ion-card-content>
+              <form #form="ngForm" (ngSubmit)="form.form.valid && registerWithCredentials()">
+                <ion-item>
+                  <ion-label position="floating">Vardas</ion-label>
+                  <ion-input [(ngModel)]="register.firstName" #firstName="ngModel" name="firstName" required></ion-input>
+                  <span slot="error" *ngIf="form.submitted || firstName.touched && !firstName.valid">Laukas yra privalomas</span>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="floating">Pavardė</ion-label>
+                  <ion-input [(ngModel)]="register.lastname" #lastname="ngModel" name="lastname" required></ion-input>
+                  <span slot="error" *ngIf="form.submitted || lastname.touched && !lastname.valid">Laukas yra privalomas</span>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="floating">El. paštas</ion-label>
+                  <ion-input [(ngModel)]="register.email" #email="ngModel" name="email" required type="email"></ion-input>
+                  <span slot="error" *ngIf="form.submitted || email.touched && !email.valid">Laukas yra privalomas</span>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="floating">Tel. numeris</ion-label>
+                  <ion-input [(ngModel)]="register.phoneNumber" #phoneNumber="ngModel" name="phoneNumber" required type="tel"></ion-input>
+                  <span slot="error" *ngIf="form.submitted || phoneNumber.touched && !phoneNumber.valid">Laukas yra privalomas</span>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="floating">Slaptažodis</ion-label>
+                  <ion-input [(ngModel)]="register.password" #password="ngModel" name="password" required type="password"></ion-input>
+                  <span slot="error" *ngIf="form.submitted || password.touched && !password.valid">Laukas yra privalomas</span>
+                </ion-item>
+                <ion-row class="ion-justify-content-center">
+                  <ion-col sizeLg="6">
+                    <ion-button type="submit" color="primary" size="full">Registruotis</ion-button>
+                  </ion-col>
+                </ion-row>
+                <ion-row class="ion-justify-content-center">
+                  <p>Arba registruokitės su:</p>
+                </ion-row>
+                <ion-row class="ion-justify-content-center">
+                    <ion-button size="large" fill="clear">
+                      <ion-icon class="google" slot="icon-only" name="logo-google"></ion-icon>
+                    </ion-button>
+                    <ion-button size="large" fill="clear">
+                      <ion-icon class="facebook" slot="icon-only" name="logo-facebook"></ion-icon>
+                    </ion-button>
+                </ion-row>
+              </form>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

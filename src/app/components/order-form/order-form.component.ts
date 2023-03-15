@@ -30,6 +30,10 @@ export class OrderFormComponent implements OnInit {
     this.orderFormService.step--;
   }
 
+  order() {
+    console.log(this.orderFormService.selectedServices);
+  }
+
   
 
   ngOnInit() {}

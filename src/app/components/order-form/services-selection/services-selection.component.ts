@@ -1,7 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import Category from 'src/app/models/services/Category';
+import Service from 'src/app/models/services/Service';
 import ServiceWithQuantity from 'src/app/models/services/ServiceWithQuantity';
 import { OrderFormService } from 'src/app/services/order-form.service';
+import { services } from '../categories';
 
 @Component({
   selector: 'app-services-selection',
@@ -15,12 +17,14 @@ export class ServicesSelectionComponent implements OnInit {
   nextDisabled: boolean = true
 
   servicesWithQuantity: ServiceWithQuantity[];
+  selectedCategoryServices: Service[];
 
   constructor(private orderFormService: OrderFormService) { }
 
   ngOnInit() {
+    this.selectedCategoryServices = services.filter(service => service.categoryId === this.selectedCategory.id);
     if (this.orderFormService.selectedServices) {
-      this.servicesWithQuantity = this.selectedCategory.services.map(service => ({ service, quantity: 0 }));
+      this.servicesWithQuantity = this.selectedCategoryServices.map(service => ({ service, quantity: 0 }));
       this.servicesWithQuantity.forEach(service => {
         this.orderFormService.selectedServices.forEach(selectedService => {
           if (service.service.id == selectedService.service.id) {
@@ -29,7 +33,7 @@ export class ServicesSelectionComponent implements OnInit {
         });
       });
     } else {
-      this.servicesWithQuantity = this.selectedCategory.services.map(service => ({ service, quantity: 0 }));
+      this.servicesWithQuantity = this.selectedCategoryServices.map(service => ({ service, quantity: 0 }));
     }
   }
 

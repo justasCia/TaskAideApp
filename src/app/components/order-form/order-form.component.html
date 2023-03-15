@@ -11,10 +11,10 @@
   </ng-container>
   <ng-container *ngIf="orderFormService.step === 4">
     <app-provider-selection></app-provider-selection>
-    <ion-button expand="block" color="danger">Užsakyti</ion-button>
+    <ion-button expand="block" color="primary" (click)="order()">Užsakyti</ion-button>
   </ng-container>
 
-  <ng-container *ngIf="orderFormService.step > 1 && orderFormService.step !== 4">
+  <ng-container *ngIf="orderFormService.step > 1">
     <ion-button expand="block" color="danger" (click)="previousStep()">Atgal</ion-button>
   </ng-container>
 </ion-content>
