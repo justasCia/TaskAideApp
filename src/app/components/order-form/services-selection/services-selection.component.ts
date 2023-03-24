@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import Category from 'src/app/models/services/Category';
 import Service from 'src/app/models/services/Service';
-import ServiceWithQuantity from 'src/app/models/services/ServiceWithQuantity';
+import ServiceWithQuantity from 'src/app/models/orders/ServiceWithQuantity';
 import { OrderFormService } from 'src/app/services/order-form.service';
 import { services } from '../categories';
 
@@ -12,44 +12,38 @@ import { services } from '../categories';
 })
 export class ServicesSelectionComponent implements OnInit {
   @Input() selectedCategory: Category;
-  @Output() servicesSelected = new EventEmitter<ServiceWithQuantity[]>();
+  @Output() servicesSelected = new EventEmitter<Service[]>();
 
   nextDisabled: boolean = true
 
-  servicesWithQuantity: ServiceWithQuantity[];
   selectedCategoryServices: Service[];
+  selectedServices: Service[];
 
   constructor(private orderFormService: OrderFormService) { }
 
   ngOnInit() {
     this.selectedCategoryServices = services.filter(service => service.categoryId === this.selectedCategory.id);
+    this.selectedServices = [];
     if (this.orderFormService.selectedServices) {
-      this.servicesWithQuantity = this.selectedCategoryServices.map(service => ({ service, quantity: 0 }));
-      this.servicesWithQuantity.forEach(service => {
-        this.orderFormService.selectedServices.forEach(selectedService => {
-          if (service.service.id == selectedService.service.id) {
-            service.quantity = selectedService.quantity;
-          }
-        });
+      this.orderFormService.selectedServices.forEach(selectedService => {
+        this.selectedServices.push(selectedService);
       });
+    }
+    this.nextDisabled = this.selectedServices.length == 0;
+  }
+
+  onServiceSelect(serviceIndex: number) {
+    const service = this.selectedCategoryServices[serviceIndex];
+    if (this.selectedServices.includes(service)) {
+      this.selectedServices = this.selectedServices.filter(item => item !== service);
     } else {
-      this.servicesWithQuantity = this.selectedCategoryServices.map(service => ({ service, quantity: 0 }));
+      this.selectedServices.push(service);
     }
-  }
-
-  incrementQuantity(index: number) {
-    this.servicesWithQuantity[index].quantity++;
-    this.nextDisabled = false;
-  }
-
-  decrementQuantity(index: number) {
-    if (this.servicesWithQuantity[index].quantity > 0) {
-      this.servicesWithQuantity[index].quantity--;
-      this.nextDisabled = this.servicesWithQuantity.filter(service => service.quantity > 0).length == 0;
-    }
+    
+    this.nextDisabled = this.selectedServices.length == 0;
   }
 
   selectServices() {
-    this.servicesSelected.emit(this.servicesWithQuantity.filter(service => service.quantity > 0));
+    this.servicesSelected.emit(this.selectedServices);
   }
 }

@@ -1,4 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import AdditionalInfo from 'src/app/models/orders/AdditionalInfo';
+import Location from '../../../models/Location';
+
 
 @Component({
   selector: 'app-additional-info-selection',
@@ -6,22 +9,30 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
   styleUrls: ['./additional-info-selection.component.scss'],
 })
 export class AdditionalInfoSelectionComponent implements OnInit {
-  @Output() infoSubmitted = new EventEmitter<{location: string, preferredDate: Date, additionalInfo: string, pictures: File[] }>();
-
-  location: string;
-  preferredDate: Date;
-  additionalInfo: string;
-  pictures: File[];
+  today: string;
+  
+  additionalInfo: AdditionalInfo = {
+    additionalInformation: "",
+    pictures: []
+  };
+  @Output() infoSubmitted = new EventEmitter<AdditionalInfo>();
 
   onPictureSelect(event: any) {
-    this.pictures = [...event.target.files];
+    this.additionalInfo.pictures = [...event.target.files];
   }
 
-  submit() {
-    this.infoSubmitted.emit({location: this.location, preferredDate: this.preferredDate, additionalInfo: this.additionalInfo, pictures: this.pictures});
+  collectAditionalInfo() {
+    this.infoSubmitted.emit(this.additionalInfo);
   }
-  
+
+  setAddress(address: Location) {
+    this.additionalInfo.address = address;
+  }
+
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    const now = new Date();
+    this.today = now.toISOString()
+  }
 }

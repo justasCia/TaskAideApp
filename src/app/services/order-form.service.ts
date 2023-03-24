@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import Category from '../models/services/Category';
-import ServiceWithQuantity from '../models/services/ServiceWithQuantity';
+import ServiceWithQuantity from '../models/orders/ServiceWithQuantity';
+import AdditionalInfo from '../models/orders/AdditionalInfo';
+import Service from '../models/services/Service';
+import Provider from '../models/Provider';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +11,9 @@ import ServiceWithQuantity from '../models/services/ServiceWithQuantity';
 export class OrderFormService {
   step = 1;
   selectedCategory: Category;
-  selectedServices: ServiceWithQuantity[];
+  selectedServices: Service[] = [];
+  additionalInfo: AdditionalInfo;
+  selectedProvider?: Provider;
   
   constructor() { }
   
@@ -17,14 +22,18 @@ export class OrderFormService {
     this.step++;
   }
 
-  selectServices(services: ServiceWithQuantity[]) {
+  selectServices(services: Service[]) {
     this.selectedServices = services;
     this.step++;
   }
 
-  submitInfo(a: any) {
-    console.log(a);
+  collectAdditionalInfo(info: AdditionalInfo) {
+    this.additionalInfo = info;
     this.step++;
+  }
+
+  selectProvider(provider: Provider) {
+    this.selectedProvider = provider;
   }
 
   previousStep() {

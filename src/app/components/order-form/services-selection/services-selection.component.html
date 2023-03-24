@@ -3,15 +3,7 @@
     <ion-label>
       <h2 class="ion-text-wrap">{{service.name}}</h2>
     </ion-label>
-    <ion-buttons slot="end">
-      <ion-button (click)="decrementQuantity(i)" fill="clear">
-        <ion-icon name="remove-circle"></ion-icon>
-      </ion-button>
-      <ion-button>{{servicesWithQuantity[i].quantity}}</ion-button>
-      <ion-button (click)="incrementQuantity(i)" fill="clear">
-        <ion-icon name="add-circle"></ion-icon>
-      </ion-button>
-    </ion-buttons>
+    <ion-checkbox slot="start" (ionChange)="onServiceSelect(i)" [checked]="selectedServices.includes(service)"></ion-checkbox>
   </ion-item>
 </ion-list>
 <ion-button [disabled]="nextDisabled" expand="block" (click)="selectServices()">Toliau</ion-button>

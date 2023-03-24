@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import Category from 'src/app/models/services/Category';
-import ServiceWithQuantity from 'src/app/models/services/ServiceWithQuantity';
 import { OrderFormService } from 'src/app/services/order-form.service';
+import AdditionalInfo from 'src/app/models/orders/AdditionalInfo';
+import Service from 'src/app/models/services/Service';
+import Provider from 'src/app/models/Provider';
 
 @Component({
   selector: 'app-order-form',
@@ -9,21 +11,23 @@ import { OrderFormService } from 'src/app/services/order-form.service';
   styleUrls: ['./order-form.component.scss'],
 })
 export class OrderFormComponent implements OnInit {
+
   constructor(public orderFormService: OrderFormService) { }
 
   selectCategory(category: Category) {
-    this.orderFormService.selectedCategory = category;
-    this.orderFormService.step++;
+    this.orderFormService.selectCategory(category);
   }
 
-  selectServices(services: ServiceWithQuantity[]) {
-    this.orderFormService.selectedServices = services;
-    this.orderFormService.step++;
+  selectServices(services: Service[]) {
+    this.orderFormService.selectServices(services);
   }
 
-  submitInfo(a: any) {
-    console.log(a);
-    this.orderFormService.step++;
+  collectAdditionalInformation(additionalInfo: AdditionalInfo) {
+    this.orderFormService.collectAdditionalInfo(additionalInfo);
+  }
+
+  selectProvider(provider: Provider) {
+    this.orderFormService.selectProvider(provider);
   }
 
   previousStep() {
@@ -31,7 +35,11 @@ export class OrderFormComponent implements OnInit {
   }
 
   order() {
-    console.log(this.orderFormService.selectedServices);
+    console.log({
+      services: this.orderFormService.selectedServices,
+      ...this.orderFormService.additionalInfo,
+      providerId: this.orderFormService.selectedProvider!.id
+    });
   }
 
   

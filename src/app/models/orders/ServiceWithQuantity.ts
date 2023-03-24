@@ -1,4 +1,4 @@
-import Service from "./Service";
+import Service from "../services/Service";
 
 export default interface ServiceWithQuantity {
     service: Service,

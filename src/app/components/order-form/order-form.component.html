@@ -7,11 +7,13 @@
       (servicesSelected)="selectServices($event)"></app-services-selection>
   </ng-container>
   <ng-container *ngIf="orderFormService.step === 3">
-    <app-additional-info-selection (infoSubmitted)="submitInfo($event)"></app-additional-info-selection>
+    <app-additional-info-selection (infoSubmitted)="collectAdditionalInformation($event)"></app-additional-info-selection>
   </ng-container>
   <ng-container *ngIf="orderFormService.step === 4">
-    <app-provider-selection></app-provider-selection>
-    <ion-button expand="block" color="primary" (click)="order()">Užsakyti</ion-button>
+    <app-provider-selection (provider)="selectProvider($event)" (order)="order()"></app-provider-selection>
+  </ng-container>
+  <ng-container *ngIf="orderFormService.step === 5">
+    <app-order-approval (order)="order()"></app-order-approval>
   </ng-container>
 
   <ng-container *ngIf="orderFormService.step > 1">

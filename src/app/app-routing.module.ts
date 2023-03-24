@@ -22,13 +22,11 @@ const routes: Routes = [
   {
     path: 'order-services',
     loadChildren: () => import('./pages/order-services/order-services.module').then( m => m.OrderServicesPageModule)
-  },  {
+  },
+  {
     path: 'register-provider',
     loadChildren: () => import('./pages/register-provider/register-provider.module').then( m => m.RegisterProviderPageModule)
   }
-
-
-
 ];
 
 @NgModule({

@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import Provider from 'src/app/models/Provider';
+import { ApiService } from 'src/app/services/api.service';
+import { OrderFormService } from 'src/app/services/order-form.service';
+import BookingRequest from '../BookingRequest';
 
 @Component({
   selector: 'app-provider-selection',
@@ -6,9 +10,38 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./provider-selection.component.scss'],
 })
 export class ProviderSelectionComponent implements OnInit {
+  providers: Provider[];
+  selectedProvider? : Provider;
 
-  constructor() { }
+  nextDisabled: boolean = true;
 
-  ngOnInit() {}
+  @Output() provider = new EventEmitter<Provider>();
+
+  constructor(private apiService: ApiService, private orderFormService: OrderFormService) { }
+
+  getAvailableProviders() {
+    const services = this.orderFormService.selectedServices.map(s => ({ service: s}));
+    const requestBody: BookingRequest = {
+      ...this.orderFormService.additionalInfo,
+      services: services,
+    }
+    this.apiService.post("bookings/providers", requestBody).subscribe((response: Provider[]) => {
+      this.providers = response;
+    });
+  }
+
+  selectProvider(provider: Provider): void {
+    this.selectedProvider = provider;
+    this.nextDisabled = false;
+    this.provider.emit(this.selectedProvider);
+  }
+
+  next() {
+    this.orderFormService.step++;
+  }
+
+  ngOnInit() {
+    this.getAvailableProviders();
+  }
 
 }

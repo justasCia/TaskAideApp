@@ -13,6 +13,8 @@ import { ServicesSelectionComponent } from 'src/app/components/order-form/servic
 import { AdditionalInfoSelectionComponent } from 'src/app/components/order-form/additional-info-selection/additional-info-selection.component';
 import { CategoryComponent } from 'src/app/components/category/category.component';
 import { ProviderSelectionComponent } from 'src/app/components/order-form/provider-selection/provider-selection.component';
+import { LocationInputComponent } from 'src/app/components/location-input/location-input.component';
+import { OrderApprovalComponent } from 'src/app/components/order-form/order-approval/order-approval.component';
 
 @NgModule({
   imports: [
@@ -28,7 +30,9 @@ import { ProviderSelectionComponent } from 'src/app/components/order-form/provid
     ServicesSelectionComponent,
     AdditionalInfoSelectionComponent,
     ProviderSelectionComponent,
-    CategoryComponent
+    CategoryComponent,
+    OrderApprovalComponent,
+    LocationInputComponent
   ]
 })
 export class OrderServicesPageModule {}
