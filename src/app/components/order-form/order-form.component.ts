@@ -3,7 +3,8 @@ import Category from 'src/app/models/services/Category';
 import { OrderFormService } from 'src/app/services/order-form.service';
 import AdditionalInfo from 'src/app/models/orders/AdditionalInfo';
 import Service from 'src/app/models/services/Service';
-import Provider from 'src/app/models/Provider';
+import User from 'src/app/models/Provider';
+import { IonLoaderService } from 'src/app/services/ion-loader.service';
 
 @Component({
   selector: 'app-order-form',
@@ -12,7 +13,7 @@ import Provider from 'src/app/models/Provider';
 })
 export class OrderFormComponent implements OnInit {
 
-  constructor(public orderFormService: OrderFormService) { }
+  constructor(public orderFormService: OrderFormService, private ionLoaderService: IonLoaderService) { }
 
   selectCategory(category: Category) {
     this.orderFormService.selectCategory(category);
@@ -26,7 +27,7 @@ export class OrderFormComponent implements OnInit {
     this.orderFormService.collectAdditionalInfo(additionalInfo);
   }
 
-  selectProvider(provider: Provider) {
+  selectProvider(provider: User) {
     this.orderFormService.selectProvider(provider);
   }
 
@@ -35,15 +36,12 @@ export class OrderFormComponent implements OnInit {
   }
 
   order() {
-    console.log({
-      services: this.orderFormService.selectedServices,
-      ...this.orderFormService.additionalInfo,
-      providerId: this.orderFormService.selectedProvider!.id
+    this.ionLoaderService.load(true);
+    this.orderFormService.order().subscribe(response => {
+      console.log(response);
+      this.ionLoaderService.load(false);
     });
   }
-
-  
-
   ngOnInit() {}
 
 }

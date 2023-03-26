@@ -9,11 +9,9 @@ import { User } from 'src/app/models/auth/User';
 export class ClientSidebarListComponent implements OnInit {
   @Input() user: User;
   public appPages = [
-    { title: 'Darbastalis', url: '/folder/Darbastalis', icon: 'apps' },
-    { title: 'Paslaugos', url: '/folder/Paslaugos', icon: 'list' },
-    { title: 'Darbai', url: '/folder/Darbai', icon: 'calendar' },
+    { title: 'Užsakyti paslaugas', url: '/order-services', icon: 'cart' },
+    { title: 'Užsakytos paslaugos', url: '/orders', icon: 'calendar' },
     { title: 'Sąskaitos', url: '/folder/Sąskaitos', icon: 'barcode' },
-    { title: 'Kategorijos', url: '/order-services', icon: 'folder-open' },
   ];
   constructor() { }
 

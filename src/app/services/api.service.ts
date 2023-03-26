@@ -22,4 +22,8 @@ export class ApiService {
   post(endpoint: string, body: any) {
     return this.httpClient.post<any>(`${this.domain}${endpoint}`, JSON.stringify(body), this.httpOptions);
   }
+
+  put(endpoint: string, body: any) {
+    return this.httpClient.put<any>(`${this.domain}${endpoint}`, JSON.stringify(body), this.httpOptions);
+  }
 }

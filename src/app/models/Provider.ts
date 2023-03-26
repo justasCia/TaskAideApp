@@ -1,8 +1,5 @@
-export default interface Provider {
-    id: number;
-    firstName: string;
-    lastName: string;
-    email: string;
+import User from "./User";
+
+export default interface Provider extends User {
     description: string;
-    phoneNumber: string;
 }

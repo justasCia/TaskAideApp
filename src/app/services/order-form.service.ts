@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import Category from '../models/services/Category';
-import ServiceWithQuantity from '../models/orders/ServiceWithQuantity';
 import AdditionalInfo from '../models/orders/AdditionalInfo';
 import Service from '../models/services/Service';
 import Provider from '../models/Provider';
+import { ApiService } from './api.service';
+import PostOrder from '../models/orders/PostOrder';
 
 @Injectable({
   providedIn: 'root'
@@ -14,9 +15,9 @@ export class OrderFormService {
   selectedServices: Service[] = [];
   additionalInfo: AdditionalInfo;
   selectedProvider?: Provider;
-  
-  constructor() { }
-  
+
+  constructor(private apiService: ApiService) { }
+
   selectCategory(category: Category) {
     this.selectedCategory = category;
     this.step++;
@@ -34,6 +35,15 @@ export class OrderFormService {
 
   selectProvider(provider: Provider) {
     this.selectedProvider = provider;
+  }
+
+  order() {
+    const bookigOrder: PostOrder = {
+      services: this.selectedServices.map(s => ({ service: s })),
+      ...this.additionalInfo,
+      providerId: this.selectedProvider!.id
+    };
+    return this.apiService.post("bookings", bookigOrder);
   }
 
   previousStep() {

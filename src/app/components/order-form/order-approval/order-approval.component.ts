@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { LocationService } from 'src/app/services/location.service';
 import { OrderFormService } from 'src/app/services/order-form.service';
 
 @Component({
@@ -11,10 +12,13 @@ export class OrderApprovalComponent implements OnInit {
 
   @Output() order = new EventEmitter();
 
-  constructor(public orderFormService: OrderFormService) { }
+  constructor(public orderFormService: OrderFormService, private locationService: LocationService) { }
 
   ngOnInit() {
-    this.getAddress();
+    this.locationService.getAddress(this.orderFormService.additionalInfo.address!).then(address => {
+      this.address = address;
+    });
+    //this.getAddress();
   }
 
   orderEmit() {

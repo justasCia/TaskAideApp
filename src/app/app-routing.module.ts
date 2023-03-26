@@ -26,7 +26,21 @@ const routes: Routes = [
   {
     path: 'register-provider',
     loadChildren: () => import('./pages/register-provider/register-provider.module').then( m => m.RegisterProviderPageModule)
-  }
+  },
+  {
+    path: 'orders',
+    loadChildren: () => import('./pages/orders/orders.module').then( m => m.OrdersPageModule)
+  },  {
+    path: 'provider-info',
+    loadChildren: () => import('./pages/provider-info/provider-info.module').then( m => m.ProviderInfoPageModule)
+  },
+
+  // {
+  //   path: 'orders/:id',
+  //   loadChildren: () => import('./pages/order/order.module').then( m => m.OrderPageModule)
+  // }
+
+
 ];
 
 @NgModule({

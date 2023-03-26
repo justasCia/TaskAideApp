@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Užsakytos paslaugos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item button *ngFor="let order of orders" [routerLink]="['/orders', order.id]">
+      <ion-label>
+        <h2>Paslaugos: {{ getServices(order) }}</h2>
+        <p><strong>Užsakymo numeris:</strong> {{ order.id }}</p>
+        <p><strong>Darbą atlieka:</strong> {{ order.provider.firstName }} {{ order.provider.lastName }}</p>
+        <p><strong>Statusas:</strong> {{ order.status }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

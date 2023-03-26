@@ -20,15 +20,15 @@
   <ion-icon slot="end" [name]="dropdownIcon"></ion-icon>
 </ion-item>
 <ion-list class="dropdown" *ngIf="isDropdownOpen" lines="none">
-  <ion-item>
+  <ion-item [routerLink]="['/folder/profile']" routerLinkActive="selected">
     <ion-icon name="person" slot="start"></ion-icon>
     <ion-label>Profilis</ion-label>
   </ion-item>
-  <ion-item>
+  <ion-item [routerLink]="['/folder/settings']" routerLinkActive="selected">
     <ion-icon name="settings" slot="start"></ion-icon>
     <ion-label>Nustatymai</ion-label>
   </ion-item>
-  <ion-item>
+  <ion-item [routerLink]="['/folder/log-out']" routerLinkActive="selected">
     <ion-icon name="log-out" slot="start"></ion-icon>
     <ion-label>Atsijungti</ion-label>
   </ion-item>

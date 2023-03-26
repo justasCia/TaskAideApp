@@ -1,0 +1,16 @@
+.table-row {
+    border: 1px solid #ccc;
+}
+
+ion-grid {
+    margin-bottom: 20px;
+}
+
+ion-row:not(:last-child) {
+    margin-bottom: 5px;
+}
+
+h2 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}

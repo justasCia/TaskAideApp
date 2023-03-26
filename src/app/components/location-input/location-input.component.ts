@@ -1,5 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MapGeocoder } from '@angular/google-maps';
+import { first } from 'rxjs';
+import { LocationService } from 'src/app/services/location.service';
 import Location from '../../models/Location';
 
 @Component({

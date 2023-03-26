@@ -1,3 +1,4 @@
+import { formatDate } from '@angular/common';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import AdditionalInfo from 'src/app/models/orders/AdditionalInfo';
 import Location from '../../../models/Location';
@@ -9,8 +10,11 @@ import Location from '../../../models/Location';
   styleUrls: ['./additional-info-selection.component.scss'],
 })
 export class AdditionalInfoSelectionComponent implements OnInit {
-  today: string;
-  
+  minStartDate: string;
+  maxStartDate: string;
+  minEndDate: string;
+  maxEndDate: string;
+
   additionalInfo: AdditionalInfo = {
     additionalInformation: "",
     pictures: []
@@ -29,10 +33,29 @@ export class AdditionalInfoSelectionComponent implements OnInit {
     this.additionalInfo.address = address;
   }
 
-  constructor() { }
+  constructor() {
+    const today = new Date();
+    this.minStartDate = formatDate(today, 'YYYY-MM-dd', 'en');
+    this.maxStartDate = '2100-12-31';
+    this.minEndDate = this.minStartDate;
+    this.maxEndDate = '2100-12-31';
+    this.additionalInfo.startDate = this.minStartDate;
+    this.additionalInfo.endDate = this.minStartDate; // set initial value to minStartDate
+  }
 
   ngOnInit() {
-    const now = new Date();
-    this.today = now.toISOString()
+
+  }
+
+  onStartDateChange() {
+    if (this.additionalInfo.startDate! > this.additionalInfo.endDate!) {
+      this.additionalInfo.endDate = this.additionalInfo.startDate;
+    }
+  }
+
+  onEndDateChange() {
+    if (this.additionalInfo.endDate! < this.additionalInfo.startDate!) {
+      this.additionalInfo.startDate = this.additionalInfo.endDate;
+    }
   }
 }

@@ -5,11 +5,14 @@
   </ion-item>
   <ion-item>
     <ion-label position="stacked">Įveskite norimą pradžios datą</ion-label>
-    <ion-datetime presentation="date"  locale="lt-LT" min={{today}} displayFormat="MMM DD, YYYY" [(ngModel)]="additionalInfo.startDate"> </ion-datetime>
+    <ion-datetime presentation="date" locale="lt-LT" min={{minStartDate}} max={{maxStartDate}}
+      displayFormat="MMM D, YYYY" [(ngModel)]="additionalInfo.startDate" (ionChange)="onStartDateChange()">
+    </ion-datetime>
   </ion-item>
   <ion-item>
     <ion-label position="stacked">Įveskite norimą pabaigos datą</ion-label>
-    <ion-datetime presentation="date"  locale="lt-LT" min={{today}} displayFormat="MMM DD, YYYY" [(ngModel)]="additionalInfo.endDate"> </ion-datetime>
+    <ion-datetime presentation="date" locale="lt-LT" min={{minEndDate}} max={{maxEndDate}} displayFormat="MMM D, YYYY"
+      [(ngModel)]="additionalInfo.endDate" (ionChange)="onEndDateChange()"> </ion-datetime>
   </ion-item>
   <ion-item>
     <ion-label position="stacked">Papildoma informacija</ion-label>

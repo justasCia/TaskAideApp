@@ -2,7 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import Provider from 'src/app/models/Provider';
 import { ApiService } from 'src/app/services/api.service';
 import { OrderFormService } from 'src/app/services/order-form.service';
-import BookingRequest from '../BookingRequest';
+import OrderRequest from '../../../models/orders/OrderRequest';
 
 @Component({
   selector: 'app-provider-selection',
@@ -21,7 +21,7 @@ export class ProviderSelectionComponent implements OnInit {
 
   getAvailableProviders() {
     const services = this.orderFormService.selectedServices.map(s => ({ service: s}));
-    const requestBody: BookingRequest = {
+    const requestBody: OrderRequest = {
       ...this.orderFormService.additionalInfo,
       services: services,
     }

@@ -36,6 +36,16 @@
       </p>
     </ion-label>
   </ion-item>
+  <ion-item *ngIf="orderFormService.additionalInfo.additionalInformation">
+    <ion-label>
+      <h2>
+        Papildoma informacija
+      </h2>
+      <p>
+        {{orderFormService.additionalInfo.additionalInformation}}
+      </p>
+    </ion-label>
+  </ion-item>
   <ion-list-header>
     <ion-label>
       <h1>
