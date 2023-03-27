@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from './models/auth/User';
+import { ApiService } from './services/api.service';
 import { AuthService } from './services/auth.service';
+import { IonToastService } from './services/ion-toast.service';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -16,9 +18,20 @@ export class AppComponent implements OnInit{
     { title: 'Sąskaitos', url: '/folder/Sąskaitos', icon: 'barcode' },
   ];
   public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private apiService: ApiService, private ionToastService: IonToastService) {}
 
   ngOnInit(): void {
     this.user$ = this.authService.user;
+    this.user$.subscribe(user => {
+      if (user && user?.role == "Provider") {
+        this.apiService.get("provider/information").subscribe({
+          error: error => {
+            if (error.status === 404) {
+              this.ionToastService.showWarning("Nesate pridėję reikiamos darbuotojo informacijos, norint dirbti, tai galite padaryti *nuorodos kur eiti*", true);
+            }
+          }
+        })
+      }
+    }).unsubscribe();
   }
 }

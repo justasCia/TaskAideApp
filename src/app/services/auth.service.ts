@@ -20,13 +20,13 @@ export class AuthService {
   ) {
     this._user = new BehaviorSubject<User | null>(null);
     this.user = this._user.asObservable();
-    
+
     const cachedUser = localStorage.getItem("user");
     if (cachedUser !== null) {
       const user = new User();
       Object.assign(user, JSON.parse(cachedUser));
       this._user.next(user);
-      if(!user.expires || new Date(user.expires) < new Date()) {
+      if (!user.expires || new Date(user.expires) < new Date()) {
         this.refreshToken().subscribe();
       }
     }
@@ -85,7 +85,9 @@ export class AuthService {
   private GetUserFromResponse(response: any) {
     const user: User = new User();
     const payload = response.accessToken.split('.')[1];
-    const jwtToken = JSON.parse(new TextDecoder().decode(toByteArray(payload)));
+    const padding = '='.repeat((4 - payload.length % 4) % 4);
+    const base64 = payload + padding;
+    const jwtToken = JSON.parse(new TextDecoder().decode(toByteArray(base64)));
     jwtToken.expires = new Date(jwtToken.exp * 1000);
     Object.assign(user, jwtToken);
     user.accessToken = response.accessToken;
@@ -107,5 +109,5 @@ export class AuthService {
 
   private stopRefreshTokenTimer() {
     clearTimeout(this.refreshTokenTimeout);
-}
+  }
 }

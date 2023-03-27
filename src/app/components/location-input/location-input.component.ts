@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MapGeocoder } from '@angular/google-maps';
 import { first } from 'rxjs';
 import { LocationService } from 'src/app/services/location.service';
@@ -15,8 +15,9 @@ export class LocationInputComponent implements OnInit {
   showList: boolean = false;
 
   @Output() location = new EventEmitter<Location>();
+  @Input() inputLocation?: Location;
 
-  constructor(private geoCoder: MapGeocoder) { }
+  constructor(private geoCoder: MapGeocoder, private locationService: LocationService) { }
 
   searchPlaces(event: any) {
     let input = event.target.value;
@@ -54,5 +55,11 @@ export class LocationInputComponent implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (this.inputLocation) {
+      this.locationService.getAddress(this.inputLocation).then(adress => {
+        this.searchQuery = adress;
+      })
+    }
+  }
 }

@@ -8,38 +8,43 @@
   <ion-card>
     <ion-card-content>
       <ion-item>
-        <ion-label position="stacked">Description</ion-label>
+        <ion-label position="stacked">Aprašymas</ion-label>
         <ion-input [(ngModel)]="provider.description"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label position="floating">Working Range</ion-label>
-        <ion-input type="number" [(ngModel)]="provider.workingRange"></ion-input>
+        <ion-label position="stacked">Vieta</ion-label>
+        <app-location-input [inputLocation]="provider.location" (location)="setAddress($event)"></app-location-input>
       </ion-item>
       <ion-item>
-        <ion-label position="floating">Base Price per Hour</ion-label>
-        <ion-input type="number" [(ngModel)]="provider.basePricePerHour"></ion-input>
+        <ion-label position="floating">Darbo atstumas, km</ion-label>
+        <ion-input type="number" min="0" [(ngModel)]="provider.workingRange"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label position="stacked">Services</ion-label>
+        <ion-label position="floating">Bazinė kaina už valandą, </ion-label>
+        <ion-input type="number" min="0" [(ngModel)]="provider.basePricePerHour"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Paslaugos</ion-label>
         <ion-item-group>
           <ng-container *ngFor="let category of categories; let i=index">
-            <ion-item-divider (click)="toggleCategory(i)">
-              {{category.name}} <ion-icon [name]="expandedCategories[i] ? 'chevron-up' : 'chevron-down'"></ion-icon>
+            <ion-item-divider (click)="toggleCategory(category.id)">
+                {{category.name}}
+                <ion-icon [name]="expandedCategories[i] ? 'chevron-up' : 'chevron-down'"></ion-icon>
             </ion-item-divider>
-            <ng-container *ngIf="expandedCategories[i]">
+            <ng-container *ngIf="expandedCategories[category.id]">
               <ion-item *ngFor="let service of getServices(category)">
-                <ion-checkbox></ion-checkbox>
+                <ion-checkbox [(ngModel)]="selectedServices[service.id]"></ion-checkbox>
                 {{ service.name }}
               </ion-item>
             </ng-container>
           </ng-container>
         </ion-item-group>
       </ion-item>
-      <ion-item *ngFor="let service of provider.providerServices">
+      <!-- <ion-item *ngFor="let service of provider.providerServices">
         <ion-label>Service ID</ion-label>
         <ion-input type="number" [(ngModel)]="service.id"></ion-input>
-      </ion-item>
-      <ion-button expand="block">Save Changes</ion-button>
+      </ion-item> -->
+      <ion-button expand="block" (click)="log()">Save Changes</ion-button>
     </ion-card-content>
   </ion-card>
 </ion-content>

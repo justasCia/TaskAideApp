@@ -16,6 +16,7 @@ import { WorkerSidebarListComponent } from './components/worker-sidebar-list/wor
 import { ClientSidebarListComponent } from './components/client-sidebar-list/client-sidebar-list.component';
 import { ApiService } from './services/api.service';
 import { OrderFormComponent } from './components/order-form/order-form.component';
+import { WelcomeComponent } from './components/welcome/welcome.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { OrderFormComponent } from './components/order-form/order-form.component
     UserProfileSidebarComponent,
     WorkerSidebarListComponent,
     ClientSidebarListComponent,
+    WelcomeComponent
   ],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule],
   providers: [

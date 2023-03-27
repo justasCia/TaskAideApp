@@ -38,7 +38,6 @@ export class OrderFormComponent implements OnInit {
   order() {
     this.ionLoaderService.load(true);
     this.orderFormService.order().subscribe(response => {
-      console.log(response);
       this.ionLoaderService.load(false);
     });
   }

@@ -8,11 +8,13 @@ export class IonLoaderService {
 
   constructor(private loadingController: LoadingController) { }
 
-  load(load: boolean) {
+  async load(load: boolean) {
     if (load) {
-      this.loadingController.create().then(response => response.present());
+      return await this.loadingController.create().then(response => {
+          return response.present()
+      });
     } else {
-      this.loadingController.dismiss();
+      return await this.loadingController.dismiss();
     }
   }
 }

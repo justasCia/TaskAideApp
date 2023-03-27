@@ -14,7 +14,7 @@ import { AdditionalInfoSelectionComponent } from 'src/app/components/order-form/
 import { CategoryComponent } from 'src/app/components/category/category.component';
 import { ProviderSelectionComponent } from 'src/app/components/order-form/provider-selection/provider-selection.component';
 import { OrderApprovalComponent } from 'src/app/components/order-form/order-approval/order-approval.component';
-import { LocationInputComponent } from 'src/app/components/location-input/location-input.component';
+import { LocationInputModule } from 'src/app/components/location-input/location-input.module';
 
 @NgModule({
   imports: [
@@ -22,6 +22,7 @@ import { LocationInputComponent } from 'src/app/components/location-input/locati
     FormsModule,
     IonicModule,
     OrderServicesPageRoutingModule,
+    LocationInputModule
   ],
   declarations: [
     OrderServicesPage,
@@ -32,7 +33,6 @@ import { LocationInputComponent } from 'src/app/components/location-input/locati
     ProviderSelectionComponent,
     CategoryComponent,
     OrderApprovalComponent,
-    LocationInputComponent
   ]
 })
 export class OrderServicesPageModule {}

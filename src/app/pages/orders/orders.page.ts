@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ModalController } from '@ionic/angular';
+import { url } from 'inspector';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/models/auth/User';
 import Order from 'src/app/models/Order';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { IonLoaderService } from 'src/app/services/ion-loader.service';
 
 @Component({
   selector: 'app-orders',
@@ -13,14 +16,14 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class OrdersPage implements OnInit {
   orders: Order[];
-  user$: Observable<User | null> = new Observable<User | null>();
 
-  constructor(private authService: AuthService, private apiService: ApiService, private modalController: ModalController) { }
+  constructor(private authService: AuthService, private apiService: ApiService, private ionLoaderService: IonLoaderService, private route: ActivatedRoute) { }
 
-  getOrders() {
-    this.apiService.get("bookings").subscribe((response: any) => {
+  getOrders(url: string) {
+    this.apiService.get(url).subscribe((response: any) => {
       this.orders = response;
-    })
+      this.ionLoaderService.load(false);
+    });
   }
 
   getServices(booking: Order) {
@@ -28,12 +31,25 @@ export class OrdersPage implements OnInit {
     booking.services.forEach(service => {
       services += service.service.name + ", "
     });
-    return services.slice(0,-2);
+    return services.slice(0, -2);
   }
 
   ngOnInit() {
-    console.log("beleka");
-    this.user$ = this.authService.user;
-    this.getOrders();
+    this.route.queryParams.subscribe(params => {
+      let url = "bookings";
+      const status = params["status"];
+      if (status) {
+        switch (status) {
+          case "pending":
+            url += "?status=Pending";
+            break;
+          default:
+            break;
+        }
+      }
+      this.ionLoaderService.load(true).then(() => {
+        this.getOrders(url);
+      })
+    });
   }
 }

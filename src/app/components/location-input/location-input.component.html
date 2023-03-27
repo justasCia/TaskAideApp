@@ -1,4 +1,5 @@
 <ion-searchbar [(ngModel)]="searchQuery" (ionChange)="searchPlaces($event)"></ion-searchbar>
+<!-- <ion-input [(ngModel)]="searchQuery" (ionChange)="searchPlaces($event)"></ion-input> -->
 <ion-list *ngIf="showList">
   <ion-item *ngFor="let place of places" (click)="selectPlace(place)">
     <ion-label>{{ place.description }}</ion-label>

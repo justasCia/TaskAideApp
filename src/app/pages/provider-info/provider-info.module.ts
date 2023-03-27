@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { ProviderInfoPageRoutingModule } from './provider-info-routing.module';
 
 import { ProviderInfoPage } from './provider-info.page';
+import { LocationInputModule } from 'src/app/components/location-input/location-input.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ProviderInfoPageRoutingModule
+    ProviderInfoPageRoutingModule,
+    LocationInputModule
   ],
   declarations: [ProviderInfoPage]
 })
