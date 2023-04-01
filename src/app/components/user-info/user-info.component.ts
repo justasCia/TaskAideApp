@@ -14,7 +14,7 @@ export class UserInfoComponent implements OnInit {
   constructor(private apiService: ApiService, private ionLoaderService: IonLoaderService) { }
 
   async ngOnInit() {
-    //await this.ionLoaderService.load(true);
+    await this.ionLoaderService.load(true);
     this.apiService.get("user/profile").subscribe((userResponse: any) => {
       this.user = userResponse;
       this.ionLoaderService.load(false);

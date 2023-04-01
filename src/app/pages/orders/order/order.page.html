@@ -117,25 +117,33 @@
             <p>{{order.additionalInformation}}</p>
           </ion-col>
         </ion-row>
-        <ng-container *ngIf="providerLooking">
-          <ion-row *ngIf="order.status == 'Pending'">
-            <ion-col>
+        <ion-row>
+          <ion-col size="12">
+            <h1>Statusas: {{order.status}}</h1>
+          </ion-col>
+          <ion-col size="12" *ngIf="order.status == 'Completed' || order.status == 'CancelledWithPartialPayment'">
+            <h1>Apmokėjimo statusas: {{order.paid ? 'Apmokėta' : 'Neapmokėta'}}</h1>
+          </ion-col>
+        </ion-row>
+        <ng-container *ngIf="providerLooking; else providerNotLooking" [ngSwitch]="order.status">
+          <ion-row *ngSwitchCase="'Pending'">
+            <ion-col size="12">
               <ion-button [routerLink]="['/orders', order.id, 'edit']">Pasiūlyti kainą</ion-button>
               <ion-button (click)="reject()">Atmesti</ion-button>
             </ion-col>
           </ion-row>
-          <ion-row *ngIf="order.status == 'InNegotiation'">
+          <ion-row *ngSwitchCase="'InNegotiation'">
             <ion-col>
               <ion-button [routerLink]="['/orders', order.id, 'edit']">Pasiūlyti kainą</ion-button>
             </ion-col>
           </ion-row>
-          <ion-row *ngIf="order.status == 'Confirmed'">
+          <ion-row *ngSwitchCase="'Confirmed'">
             <ion-col>
               <ion-button [routerLink]="['/orders', order.id, 'edit']">Užbaigti darbus ir paruošti sąskaitą</ion-button>
             </ion-col>
           </ion-row>
         </ng-container>
-        <ng-container *ngIf="!providerLooking">
+        <ng-template #providerNotLooking>
           <ion-row *ngIf="order.status == 'InNegotiation'" class="ion-justify-content-center">
             <ion-col size="6" class="ion-text-center">
               <ion-label color="danger">Dėmesio! Paspaudus mygtuką, sutinkate su paslaugos teikėjo terminais ir kaina.</ion-label><br/>
@@ -143,7 +151,12 @@
               <ion-button color="danger" (click)="cancelOrder()">Atšaukti užklausą</ion-button>
             </ion-col>
           </ion-row>
-        </ng-container>
+          <ion-row *ngIf="(order.status == 'Completed' || order.status == 'CancelledWithPartialPayment') && !order.paid" class="ion-justify-content-center">
+            <ion-col size="6" class="ion-text-center">
+              <ion-button (click)="payOrder()">Apmokėti</ion-button>
+            </ion-col>
+          </ion-row>
+        </ng-template>
       </ion-grid>
     </ion-card-content>
   </ion-card>

@@ -6,6 +6,8 @@ import { ApiService } from 'src/app/services/api.service';
 import { IonLoaderService } from 'src/app/services/ion-loader.service';
 import { IonToastService } from 'src/app/services/ion-toast.service';
 import { categories, services } from '../order-form/categories';
+import { ModalController } from '@ionic/angular';
+import { BankAccountModalComponent } from '../bank-account-modal/bank-account-modal.component';
 
 interface Provider {
   description: string;
@@ -13,6 +15,7 @@ interface Provider {
   workingRange: number;
   basePricePerHour: number;
   providerServices: { id: number }[];
+  bankAccount?: string;
 }
 
 @Component({
@@ -22,6 +25,8 @@ interface Provider {
 })
 export class ProviderInfoComponent implements OnInit {
   provider: Provider;
+  existingProvider: boolean = false;
+  existingBankAccount: boolean = false;
   categories: Category[] = categories;
 
 
@@ -32,23 +37,23 @@ export class ProviderInfoComponent implements OnInit {
     this.expandedCategories[index] = !this.expandedCategories[index];
   }
 
-  constructor(private apiService: ApiService, private ionLoaderService: IonLoaderService, private ionToastService: IonToastService) { }
+  constructor(private apiService: ApiService, private ionLoaderService: IonLoaderService, private ionToastService: IonToastService, private modalController: ModalController) { }
 
   getServices(category: Category) {
     return services.filter(s => s.categoryId === category.id);
   }
 
   ngOnInit() {
-    this.ionLoaderService.load(true).then(() => {
       this.apiService.get("provider/information").subscribe({
         next: (response: any) => {
           this.provider = response;
+          this.existingProvider = true;
+          this.existingBankAccount = this.provider.bankAccount != null;
           this.provider.providerServices.forEach(service => {
             this.selectedServices[service.id] = true;
             const selectedService = services.filter(s => s.id == service.id)[0];
             this.expandedCategories[selectedService.categoryId] = true;
           });
-          this.ionLoaderService.load(false);
         },
         error: (error: HttpErrorResponse) => {
           if (error.status === 404) {
@@ -59,13 +64,11 @@ export class ProviderInfoComponent implements OnInit {
               providerServices: []
             };
           }
-          this.ionLoaderService.load(false);
         }
       });
-    })
   }
 
-  log() {
+  updateInformation() {
     this.ionLoaderService.load(true);
     this.provider.providerServices = (this.selectedServices.map((s, index) => {
       if (s) {
@@ -76,6 +79,8 @@ export class ProviderInfoComponent implements OnInit {
     }).filter(s => s.id !== -1));
     this.apiService.put("provider/information", this.provider).subscribe(responseProvider => {
       this.provider = responseProvider;
+      this.existingProvider = true;
+      this.existingBankAccount = this.provider.bankAccount != null;
       this.ionToastService.showSuccess("Pavyko atnaujinti informaciją");
       this.ionLoaderService.load(false);
     })
@@ -83,5 +88,22 @@ export class ProviderInfoComponent implements OnInit {
 
   setAddress(location: Location) {
     this.provider.location = location;
+  }
+
+  async openBankAccountModal() {
+    const modal = await this.modalController.create({
+      component: BankAccountModalComponent,
+      componentProps: {
+        update: this.existingBankAccount,
+      }
+    });
+    modal.onDidDismiss().then((result) => {
+      if (result.data) {
+        this.provider = result.data;
+      }
+      this.existingBankAccount = this.provider.bankAccount != null;
+    });
+
+    return await modal.present();
   }
 }

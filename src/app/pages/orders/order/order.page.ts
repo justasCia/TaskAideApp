@@ -128,4 +128,12 @@ export class OrderPage implements OnInit, ViewWillEnter {
       }
     });
   }
+
+  async payOrder() {
+    await this.ionLoaderService.load(true);
+    this.apiService.get(`bookings/${this.order.id}/payment`).subscribe((response: any) => {
+      window.location.href = response.checkoutUrl;
+      this.ionLoaderService.load(false);
+    });
+  }
 }

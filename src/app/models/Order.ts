@@ -26,4 +26,5 @@ export default interface Order {
     endDate: string;
     additionalInformation: string;
     status: string;
+    paid: boolean;
   }

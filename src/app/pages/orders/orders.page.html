@@ -9,6 +9,7 @@
 </ion-header>
 
 <ion-content>
+  <app-provider-not-activated *ngIf="!providerActivated"></app-provider-not-activated>
   <ion-list>
     <ion-item button *ngFor="let order of orders" [routerLink]="['/orders', order.id]">
       <ion-label>

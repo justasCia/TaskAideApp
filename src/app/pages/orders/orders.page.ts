@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ModalController } from '@ionic/angular';
@@ -16,14 +17,28 @@ import { IonLoaderService } from 'src/app/services/ion-loader.service';
 })
 export class OrdersPage implements OnInit {
   orders: Order[];
+  providerActivated: boolean = true;
 
   constructor(private authService: AuthService, private apiService: ApiService, private ionLoaderService: IonLoaderService, private route: ActivatedRoute) { }
 
   getOrders(url: string) {
-    this.apiService.get(url).subscribe((response: any) => {
-      this.orders = response;
-      this.ionLoaderService.load(false);
-    });
+    this.apiService.get(url).subscribe({
+      next: (response: any) => {
+        this.orders = response;
+        this.providerActivated = true;
+        this.ionLoaderService.load(false);
+      },
+      error: (error: HttpErrorResponse) => {
+        if (error.error && error.error === "User cannot accept bookings until provider information filled") {
+          this.providerActivated = false;
+        }
+        this.ionLoaderService.load(false);
+      }
+    })
+    // this.apiService.get(url).subscribe((response: any) => {
+    //   this.orders = response;
+    //   this.ionLoaderService.load(false);
+    // });
   }
 
   getServices(booking: Order) {

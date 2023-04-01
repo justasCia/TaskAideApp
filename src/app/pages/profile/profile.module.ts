@@ -10,6 +10,7 @@ import { ProfilePage } from './profile.page';
 import { ProviderInfoComponent } from 'src/app/components/provider-info/provider-info.component';
 import { LocationInputModule } from 'src/app/components/location-input/location-input.module';
 import { UserInfoComponent } from 'src/app/components/user-info/user-info.component';
+import { BankAccountModalComponent } from 'src/app/components/bank-account-modal/bank-account-modal.component';
 
 @NgModule({
   imports: [
@@ -22,6 +23,8 @@ import { UserInfoComponent } from 'src/app/components/user-info/user-info.compon
   declarations: [
     ProfilePage,
     ProviderInfoComponent,
-    UserInfoComponent]
+    UserInfoComponent,
+    BankAccountModalComponent]
+    
 })
 export class ProfilePageModule { }

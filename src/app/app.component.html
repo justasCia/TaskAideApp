@@ -1,6 +1,6 @@
 <ion-app>
   <ion-split-pane contentId="main-content" when="xl">
-    <ion-menu *ngIf="user$ | async as user" contentId="main-content" type="overlay">
+    <ion-menu *ngIf="user" contentId="main-content" type="overlay">
       <ion-content>
         <ion-header>
           <app-user-profile-sidebar [user]="user"></app-user-profile-sidebar>

@@ -79,7 +79,8 @@ export class AuthService {
     this.stopRefreshTokenTimer();
     this._user.next(null);
     localStorage.clear();
-    this.router.navigate(['/login']);
+    //this.router.navigate(['/']);
+    window.location.href = "/";
   }
 
   private GetUserFromResponse(response: any) {
@@ -98,8 +99,10 @@ export class AuthService {
 
   private startRefreshTokenTimer() {
     // parse json object from base64 encoded jwt token
-    const jwtBase64 = this.userValue!.accessToken!.split('.')[1];
-    const jwtToken = JSON.parse(new TextDecoder().decode(toByteArray(jwtBase64)));
+    const payload = this.userValue!.accessToken!.split('.')[1];
+    const padding = '='.repeat((4 - payload.length % 4) % 4);
+    const base64 = payload + padding;
+    const jwtToken = JSON.parse(new TextDecoder().decode(toByteArray(base64)));
 
     // set a timeout to refresh the token a minute before it expires
     const expires = new Date(jwtToken.exp * 1000);
