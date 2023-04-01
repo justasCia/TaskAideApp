@@ -59,8 +59,7 @@
               <ion-item fill="outline">
                 <ion-input type="number" min="0" [(ngModel)]="service.hoursOfWork"></ion-input>
               </ion-item>
-              <ng-container
-                *ngIf="!servicesValidationSucessfull && service.hoursOfWork == null">
+              <ng-container *ngIf="!servicesValidationSucessfull && service.hoursOfWork == null">
                 <ion-icon name="alert-circle-outline" color="danger"></ion-icon>
                 <ion-label color="danger" position="floating">Valandų kiekis yra privalomas</ion-label>
               </ng-container>
@@ -69,18 +68,17 @@
               <ion-item fill="outline">
                 <ion-input type="number" min="0" [(ngModel)]="service.price"></ion-input>
               </ion-item>
-              <ng-container
-                *ngIf="!servicesValidationSucessfull && service.price== null">
+              <ng-container *ngIf="!servicesValidationSucessfull && service.price== null">
                 <ion-icon name="alert-circle-outline" color="danger"></ion-icon>
-                <ion-label color="danger" position="floating">Kaina yra privalomas</ion-label>
+                <ion-label color="danger" position="floating">Kaina yra privaloma</ion-label>
               </ng-container>
             </ion-col>
           </ion-row>
-          <ion-row>
+          <!-- <ion-row>
             <ion-col>
               <ion-button (click)="updateServices()">Atnaujinti paslaugų informaciją</ion-button>
             </ion-col>
-          </ion-row>
+          </ion-row> -->
           <ion-row>
             <ion-col>
               <h2>Medžiagos</h2>
@@ -99,8 +97,7 @@
               <ion-item fill="outline">
                 <ion-input [(ngModel)]="materialPrice.name"></ion-input>
               </ion-item>
-              <ng-container
-                *ngIf="!materialPricesValidationSucessfull && materialPrice.name.trim() == ''">
+              <ng-container *ngIf="!materialPricesValidationSucessfull && materialPrice.name.trim() == ''">
                 <ion-icon name="alert-circle-outline" color="danger"></ion-icon>
                 <ion-label color="danger" position="floating">Pavadinimas yra privalomas</ion-label>
               </ng-container>
@@ -109,8 +106,7 @@
               <ion-item fill="outline">
                 <ion-input type="number" min="0" [(ngModel)]="materialPrice.price"></ion-input>
               </ion-item>
-              <ng-container
-                *ngIf="!materialPricesValidationSucessfull && materialPrice.price == null">
+              <ng-container *ngIf="!materialPricesValidationSucessfull && materialPrice.price == null">
                 <ion-icon name="alert-circle-outline" color="danger"></ion-icon>
                 <ion-label color="danger" position="floating">Kaina yra privaloma</ion-label>
               </ng-container>
@@ -121,25 +117,30 @@
               </ion-button>
             </ion-col>
           </ion-row>
-          <ion-row>
-            <ion-col size="12">
-              <ion-button fill="outline" (click)="addMaterialPrice()">Pridėti medžiagą</ion-button>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col>
-              <ion-button (click)="updateMaterialPrices()">Atnaujinti medžiagų kainas</ion-button>
-            </ion-col>
-          </ion-row>
+          <ng-container *ngIf="providerLooking">
+            <ion-row
+              *ngIf="order.status != 'Completed' && order.status != 'Rejected' && order.status != 'Cancelled' && order.status != 'CancelledWithPartialPayment'">
+              <ion-col size="12">
+                <ion-button fill="outline" (click)="addMaterialPrice()">Pridėti medžiagą</ion-button>
+              </ion-col>
+            </ion-row>
+            <ion-row *ngIf="order.status == 'Pending'">
+              <ion-col>
+                <ion-button (click)="sendOrUpdateOffer()">Pasiūlyti salygas</ion-button>
+              </ion-col>
+            </ion-row>
+            <ion-row *ngIf="order.status == 'InNegotiation'">
+              <ion-col>
+                <ion-button (click)="sendOrUpdateOffer()">Atnaujinti sąlygas</ion-button>
+              </ion-col>
+            </ion-row>
+            <ion-row *ngIf="order.status == 'Confirmed'">
+              <ion-col>
+                <ion-button (click)="sendBill()">Užbaigti darbą ir siūsti sąskaitą.</ion-button>
+              </ion-col>
+            </ion-row>
+          </ng-container>
         </ion-grid>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col size="12">
-        <h2>Papildoma informacija:</h2>
-        <ion-item fill="outline">
-          <ion-textarea rows="6" [(ngModel)]="order.additionalInformation"></ion-textarea>
-        </ion-item>
       </ion-col>
     </ion-row>
   </ion-grid>

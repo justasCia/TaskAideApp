@@ -10,12 +10,12 @@ export class WorkerSidebarListComponent implements OnInit {
   @Input() user: User;
   public appPages = [
     { title: 'Paslaugų užklausos', url: '/orders', queryParams: {status: "pending"}, icon: 'contract' },
-    { title: 'Darbai', url: '/orders', icon: 'calendar' },
-    { title: 'Sąskaitos', url: '/folder/Sąskaitos', icon: 'barcode' },
+    { title: 'Paslaugos derbybų stadijoje', url: '/orders', queryParams: {status: "inNegotiation"}, icon: 'chatbubbles' },
+    { title: 'Vykdomi darbai', url: '/orders', queryParams: {status: "confirmed"}, icon: 'clipboard' },
+    { title: 'Visi darbai', url: '/orders', icon: 'list' },
+    { title: 'Ataskaitos', url: '/folder/Ataskaitos', icon: 'barcode' },
     { title: 'Darbastalis', url: '/folder/Darbastalis', icon: 'apps' },
-    { title: 'Paslaugos', url: '/folder/Paslaugos', icon: 'list' },
     { title: 'Darbai', url: '/folder/Darbai', icon: 'calendar' },
-    { title: 'Sąskaitos', url: '/folder/Sąskaitos', icon: 'barcode' },
   ];
   constructor() { }
 

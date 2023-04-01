@@ -43,6 +43,12 @@ export class OrdersPage implements OnInit {
           case "pending":
             url += "?status=Pending";
             break;
+          case "inNegotiation":
+            url += "?status=InNegotiation";
+            break;
+          case "confirmed":
+            url += "?status=Confirmed";
+            break;
           default:
             break;
         }

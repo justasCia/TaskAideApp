@@ -27,7 +27,7 @@ export class AppComponent implements OnInit{
         this.apiService.get("provider/information").subscribe({
           error: error => {
             if (error.status === 404) {
-              this.ionToastService.showWarning("Nesate pridėję reikiamos darbuotojo informacijos, norint dirbti, tai galite padaryti *nuorodos kur eiti*", true);
+              this.ionToastService.showWarning("Nesate pridėję reikiamos darbuotojo informacijos, norint dirbti, tai galite padaryti nuėjė į savo profilį", true);
             }
           }
         })

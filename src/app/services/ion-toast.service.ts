@@ -15,6 +15,7 @@ export class IonToastService {
         color: 'success',
       });
       toast.present();
+      return;
     }
 
     const toast = await this.toastController.create({
@@ -37,6 +38,7 @@ export class IonToastService {
         color: 'warning',
       });
       toast.present();
+      return;
     }
 
     const toast = await this.toastController.create({
@@ -59,6 +61,7 @@ export class IonToastService {
         color: 'danger',
       });
       toast.present();
+      return;
     }
 
     const toast = await this.toastController.create({

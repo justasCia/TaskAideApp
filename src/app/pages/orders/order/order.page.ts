@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AlertController, ViewDidEnter, ViewWillEnter } from '@ionic/angular';
 import Order from 'src/app/models/Order';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { IonLoaderService } from 'src/app/services/ion-loader.service';
+import { IonToastService } from 'src/app/services/ion-toast.service';
 import { LocationService } from 'src/app/services/location.service';
 
 @Component({
@@ -10,27 +13,36 @@ import { LocationService } from 'src/app/services/location.service';
   templateUrl: './order.page.html',
   styleUrls: ['./order.page.scss'],
 })
-export class OrderPage implements OnInit {
+export class OrderPage implements OnInit, ViewWillEnter {
   order: Order;
   orderId: number;
   orderAddress: string;
-  providerLooking: boolean;
-  constructor(private authService: AuthService, private route: ActivatedRoute, private apiService: ApiService, private locationService: LocationService, private router: Router) { }
+  providerLooking: boolean = false;
+  constructor(private authService: AuthService,
+    private route: ActivatedRoute,
+    private apiService: ApiService,
+    private locationService: LocationService,
+    private router: Router,
+    private alertController: AlertController,
+    private ionLoaderService: IonLoaderService,
+    private ionToastService: IonToastService) { }
 
-  ionViewWillEnter() {
-    this.ngOnInit();
+  async ionViewWillEnter() {
+    if (this.order) {
+      this.ngOnInit();
+    }
   }
 
-  ngOnInit() {
-    this.authService.user.subscribe(user => {
-      this.providerLooking = user!.role == "Provider";
-    })
+  async ngOnInit() {
+    await this.ionLoaderService.load(true);
+    this.providerLooking = (this.authService.userValue != null && this.authService.userValue.role != null && this.authService.userValue.role == "Provider");
     this.route.params.subscribe(params => {
       this.orderId = params['id'];
     });
     this.apiService.get(`bookings/${this.orderId}`).subscribe((response: any) => {
-      this.order = response
+      this.order = response;
       this.getAddress();
+      this.ionLoaderService.load(false);
     });
   }
 
@@ -46,7 +58,74 @@ export class OrderPage implements OnInit {
     return `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day}`;
   }
 
-  goToEdit() {
-    this.router.navigate([`/orders/${this.orderId}/edit`]);
+  async acceptOffer() {
+    if (!this.providerLooking) {
+      await this.ionLoaderService.load(true);
+      this.apiService.put(`bookings/${this.order.id}/status`, "Confirmed").subscribe(responseOrder => {
+        this.order = responseOrder;
+        this.ionLoaderService.load(false);
+        this.ionToastService.showSuccess("Užsakymas sėkmingai priimtas");
+      })
+    }
+  }
+
+  async cancelOrder() {
+    const alert = await this.alertController.create({
+      header: 'Ar tikrai norite atšaukti šią darbo užklausą?',
+      buttons: [
+        {
+          text: 'Atšaukti',
+        },
+        {
+          text: 'Patvirtinti',
+          handler: () => {
+            this.cancel();
+          },
+        },
+      ],
+    });
+    await alert.present();
+  }
+
+  private async cancel() {
+    await this.ionLoaderService.load(true);
+    this.apiService.put(`bookings/${this.order.id}/status`, "Cancelled").subscribe({
+      next: response => {
+        this.ionLoaderService.load(false);
+        this.ionToastService.showSuccess("Užsakymas sėkmingai atšauktas");
+        this.router.navigate(['/orders']);
+      }
+    });
+  }
+
+  async reject() {
+    if (this.providerLooking) {
+      const alert = await this.alertController.create({
+        header: 'Ar tikrai norite atmesti šią darbo užklausą?',
+        buttons: [
+          {
+            text: 'Atšaukti',
+          },
+          {
+            text: 'Patvirtinti',
+            handler: () => {
+              this.rejectOrder();
+            },
+          },
+        ],
+      });
+      await alert.present();
+    }
+  }
+
+  private async rejectOrder() {
+    await this.ionLoaderService.load(true);
+    this.apiService.put(`bookings/${this.order.id}/status`, "Rejected").subscribe({
+      next: response => {
+        this.ionLoaderService.load(false);
+        this.ionToastService.showSuccess("Užsakymas sėkmingai atmestas");
+        this.router.navigate(['/orders'], { queryParams: { status: "pending" } });
+      }
+    });
   }
 }

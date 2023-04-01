@@ -26,7 +26,7 @@ export class LoginPage implements OnInit {
   }
 
   logInWithCredentials() {
-    this.authService.login(this.login).pipe(first())
+    this.authService.login(this.login)
       .subscribe({
         next: () => {
           this.router.navigate(['/']);

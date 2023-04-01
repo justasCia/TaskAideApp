@@ -1,11 +1,11 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { categories, services } from 'src/app/components/order-form/categories';
 import Location from 'src/app/models/Location';
 import Category from 'src/app/models/services/Category';
 import { ApiService } from 'src/app/services/api.service';
 import { IonLoaderService } from 'src/app/services/ion-loader.service';
 import { IonToastService } from 'src/app/services/ion-toast.service';
+import { categories, services } from '../order-form/categories';
 
 interface Provider {
   description: string;
@@ -17,10 +17,10 @@ interface Provider {
 
 @Component({
   selector: 'app-provider-info',
-  templateUrl: './provider-info.page.html',
-  styleUrls: ['./provider-info.page.scss'],
+  templateUrl: './provider-info.component.html',
+  styleUrls: ['./provider-info.component.scss'],
 })
-export class ProviderInfoPage implements OnInit {
+export class ProviderInfoComponent implements OnInit {
   provider: Provider;
   categories: Category[] = categories;
 
@@ -76,7 +76,7 @@ export class ProviderInfoPage implements OnInit {
     }).filter(s => s.id !== -1));
     this.apiService.put("provider/information", this.provider).subscribe(responseProvider => {
       this.provider = responseProvider;
-      this.ionToastService.showSuccess("Pavyko");
+      this.ionToastService.showSuccess("Pavyko atnaujinti informaciją");
       this.ionLoaderService.load(false);
     })
   }
@@ -84,5 +84,4 @@ export class ProviderInfoPage implements OnInit {
   setAddress(location: Location) {
     this.provider.location = location;
   }
-
 }
