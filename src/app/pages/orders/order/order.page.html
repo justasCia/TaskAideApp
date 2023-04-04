@@ -21,7 +21,11 @@
           </ion-col>
           <ion-col sizeSm="12" sizeMd="6">
             <h1>Darbuotojas:</h1>
-            <h2>{{order.provider.firstName}} {{order.provider.lastName}}</h2>
+            <h2>
+              <ng-container *ngIf="!order.provider.companyName; else company"> {{ order.provider.firstName }} {{
+                order.provider.lastName }}</ng-container>
+              <ng-template #company>{{order.provider.companyName}}</ng-template>
+            </h2>
             <h3>{{order.provider.email}}</h3>
             <h3>{{order.provider.phoneNumber}}</h3>
           </ion-col>
@@ -146,12 +150,14 @@
         <ng-template #providerNotLooking>
           <ion-row *ngIf="order.status == 'InNegotiation'" class="ion-justify-content-center">
             <ion-col size="6" class="ion-text-center">
-              <ion-label color="danger">Dėmesio! Paspaudus mygtuką, sutinkate su paslaugos teikėjo terminais ir kaina.</ion-label><br/>
+              <ion-label color="danger">Dėmesio! Paspaudus mygtuką, sutinkate su paslaugos teikėjo terminais ir
+                kaina.</ion-label><br />
               <ion-button (click)="acceptOffer()">Priimti pasiūlymą</ion-button>
               <ion-button color="danger" (click)="cancelOrder()">Atšaukti užklausą</ion-button>
             </ion-col>
           </ion-row>
-          <ion-row *ngIf="(order.status == 'Completed' || order.status == 'CancelledWithPartialPayment') && !order.paid" class="ion-justify-content-center">
+          <ion-row *ngIf="(order.status == 'Completed' || order.status == 'CancelledWithPartialPayment') && !order.paid"
+            class="ion-justify-content-center">
             <ion-col size="6" class="ion-text-center">
               <ion-button (click)="payOrder()">Apmokėti</ion-button>
             </ion-col>

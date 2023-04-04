@@ -90,6 +90,8 @@ export class AuthService {
     const base64 = payload + padding;
     const jwtToken = JSON.parse(new TextDecoder().decode(toByteArray(base64)));
     jwtToken.expires = new Date(jwtToken.exp * 1000);
+    jwtToken.role = jwtToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+    jwtToken.role = Array.isArray(jwtToken.role) ? jwtToken.role : [jwtToken.role];
     Object.assign(user, jwtToken);
     user.accessToken = response.accessToken;
     return user;

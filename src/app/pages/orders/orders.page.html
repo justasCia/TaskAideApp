@@ -15,7 +15,11 @@
       <ion-label>
         <h2>Paslaugos: {{ getServices(order) }}</h2>
         <p><strong>Užsakymo numeris:</strong> {{ order.id }}</p>
-        <p><strong>Darbą atlieka:</strong> {{ order.provider.firstName }} {{ order.provider.lastName }}</p>
+        <p>
+          <strong>Darbą atlieka:</strong>
+          <ng-container *ngIf="!order.provider.companyName; else company"> {{ order.provider.firstName }} {{ order.provider.lastName }}</ng-container>
+          <ng-template #company>{{order.provider.companyName}}</ng-template>
+        </p>
         <p><strong>Statusas:</strong> {{ order.status }}</p>
       </ion-label>
     </ion-item>

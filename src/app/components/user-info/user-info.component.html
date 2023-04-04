@@ -3,17 +3,25 @@
     <ion-card-title>Vartotojo informacija</ion-card-title>
   </ion-card-header>
   <ion-card-content>
+    <ng-container *ngIf="!user.companyName; else company">
+      <ion-item lines="none">
+        <ion-label position="stacked">Vardas:</ion-label>
+        <ion-text>{{user.firstName}}</ion-text>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-label position="stacked">Pavardė:</ion-label>
+        <ion-text>{{user.lastName}}</ion-text>
+      </ion-item>
+    </ng-container>
+    <ng-template #company>
+      <ion-item lines="none">
+        <ion-label position="stacked">Kompanijos pavadinimas:</ion-label>
+        <ion-text>{{user.companyName}}</ion-text>
+      </ion-item>
+    </ng-template>
     <ion-item lines="none">
       <ion-label position="stacked">El. paštas:</ion-label>
       <ion-text>{{user.email}}</ion-text>
-    </ion-item>
-    <ion-item lines="none">
-      <ion-label position="stacked">Vardas:</ion-label>
-      <ion-text>{{user.firstName}}</ion-text>
-    </ion-item>
-    <ion-item lines="none">
-      <ion-label position="stacked">Pavardė:</ion-label>
-      <ion-text>{{user.lastName}}</ion-text>
     </ion-item>
     <ion-item lines="none">
       <ion-label position="stacked">Telefono numeris:</ion-label>

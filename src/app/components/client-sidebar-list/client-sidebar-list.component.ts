@@ -7,7 +7,6 @@ import { User } from 'src/app/models/auth/User';
   styleUrls: ['./client-sidebar-list.component.scss'],
 })
 export class ClientSidebarListComponent implements OnInit {
-  @Input() user: User;
   public appPages = [
     { title: 'Užsakyti paslaugas', url: '/order-services', icon: 'cart' },
     { title: 'Užsakytos paslaugos', url: '/orders', icon: 'calendar' },

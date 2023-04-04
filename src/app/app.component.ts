@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.authService.userValue;
-    if (this.user && this.user?.role == "Provider") {
+    if (this.user && this.user?.role?.includes("Provider")) {
       this.apiService.get("provider/information").subscribe({
         next: (provider: any) => {
           if (!provider.bankAccount) {

@@ -35,7 +35,7 @@ export class OrderPage implements OnInit, ViewWillEnter {
 
   async ngOnInit() {
     await this.ionLoaderService.load(true);
-    this.providerLooking = (this.authService.userValue != null && this.authService.userValue.role != null && this.authService.userValue.role == "Provider");
+    this.providerLooking = (this.authService.userValue != null && this.authService.userValue.role != null && this.authService.userValue.role.includes("Provider"));
     this.route.params.subscribe(params => {
       this.orderId = params['id'];
     });

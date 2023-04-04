@@ -7,7 +7,6 @@ import { User } from 'src/app/models/auth/User';
   styleUrls: ['./worker-sidebar-list.component.scss'],
 })
 export class WorkerSidebarListComponent implements OnInit {
-  @Input() user: User;
   public appPages = [
     { title: 'Paslaugų užklausos', url: '/orders', queryParams: {status: "pending"}, icon: 'contract' },
     { title: 'Paslaugos derbybų stadijoje', url: '/orders', queryParams: {status: "inNegotiation"}, icon: 'chatbubbles' },
