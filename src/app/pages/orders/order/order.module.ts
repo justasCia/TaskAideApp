@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { OrderPageRoutingModule } from './order-routing.module';
 
 import { OrderPage } from './order.page';
+import { AddReviewModalComponent } from 'src/app/components/add-review-modal/add-review-modal.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,6 @@ import { OrderPage } from './order.page';
     IonicModule,
     OrderPageRoutingModule
   ],
-  declarations: [OrderPage]
+  declarations: [OrderPage, AddReviewModalComponent]
 })
 export class OrderPageModule {}

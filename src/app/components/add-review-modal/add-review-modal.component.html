@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Pridėti įvertinimą</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card>
+    <ion-card-content>
+      <form #form="ngForm" (ngSubmit)="form.form.valid && addReview()">
+        <ion-row>
+          <ion-col size="12" class="ion-text-center">
+              <ion-icon name="star" size="large" [style.color]="review.rating >= 1 ? '#ffd700' : '#b3b3b3'" (click)="review.rating = 1"></ion-icon>
+              <ion-icon name="star" size="large" [style.color]="review.rating >= 2 ? '#ffd700' : '#b3b3b3'" (click)="review.rating = 2"></ion-icon>
+              <ion-icon name="star" size="large" [style.color]="review.rating >= 3 ? '#ffd700' : '#b3b3b3'" (click)="review.rating = 3"></ion-icon>
+              <ion-icon name="star" size="large" [style.color]="review.rating >= 4 ? '#ffd700' : '#b3b3b3'" (click)="review.rating = 4"></ion-icon>
+              <ion-icon name="star" size="large" [style.color]="review.rating >= 5 ? '#ffd700' : '#b3b3b3'" (click)="review.rating = 5"></ion-icon>
+          </ion-col>
+        </ion-row>
+        <ion-item>
+          <ion-label position="stacked">Komentaras</ion-label>
+          <ion-textarea [(ngModel)]="review.comment" #comment="ngModel" name="comment" rows="5"></ion-textarea>
+        </ion-item>
+        <ion-row class="ion-justify-content-center">
+          <ion-col sizeLg="12">
+            <ion-button type="submit" color="primary" size="full">Pridėti</ion-button>
+          </ion-col>
+        </ion-row>
+      </form>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

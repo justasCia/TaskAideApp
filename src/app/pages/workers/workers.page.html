@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Darbuotojai
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let worker of workers">
+      <ion-label>
+        <h2>{{ worker.firstName }} {{ worker.lastName }}</h2>
+        <p>El. paštas: {{ worker.email }}</p>
+        <p>Telefonas: {{ worker.phoneNumber }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="openRegisterWorkerModal()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

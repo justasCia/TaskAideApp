@@ -31,7 +31,9 @@ export class EditPage implements OnInit {
 
   ngOnInit() {
     this.ionLoaderService.load(true).then(() => {
-      this.providerLooking = (this.authService.userValue != null && this.authService.userValue.role != null && this.authService.userValue.role.includes("Provider"));
+      this.providerLooking = (this.authService.userValue != null && 
+        this.authService.userValue.role != null && 
+        (this.authService.userValue.role.includes("Provider") || this.authService.userValue.role.includes("Company") || this.authService.userValue.role.includes("CompanyWorker")));
       this.route.params.subscribe(params => {
         this.orderId = params['id'];
       });

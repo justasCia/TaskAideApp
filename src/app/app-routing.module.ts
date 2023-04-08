@@ -43,7 +43,15 @@ const routes: Routes = [
     path: 'profile',
     canActivate: [UserAuthenticatedGuard],
     loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule)
+  },  {
+    path: 'provider-report',
+    loadChildren: () => import('./pages/provider-report/provider-report.module').then( m => m.ProviderReportPageModule)
   },
+  {
+    path: 'workers',
+    loadChildren: () => import('./pages/workers/workers.module').then( m => m.WorkersPageModule)
+  },
+
 
 
   // {

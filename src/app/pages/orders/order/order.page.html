@@ -156,10 +156,13 @@
               <ion-button color="danger" (click)="cancelOrder()">Atšaukti užklausą</ion-button>
             </ion-col>
           </ion-row>
-          <ion-row *ngIf="(order.status == 'Completed' || order.status == 'CancelledWithPartialPayment') && !order.paid"
+          <ion-row *ngIf="(order.status == 'Completed' || order.status == 'CancelledWithPartialPayment')"
             class="ion-justify-content-center">
-            <ion-col size="6" class="ion-text-center">
+            <ion-col size="6" class="ion-text-center" *ngIf="!order.paid">
               <ion-button (click)="payOrder()">Apmokėti</ion-button>
+            </ion-col>
+            <ion-col size="6" class="ion-text-center" *ngIf="!order.review">
+              <ion-button (click)="openAddReviewModal()">Pridėti įvertinimą</ion-button>
             </ion-col>
           </ion-row>
         </ng-template>

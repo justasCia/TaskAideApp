@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { APP_INITIALIZER, DEFAULT_CURRENCY_CODE, LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
@@ -17,6 +17,10 @@ import { ClientSidebarListComponent } from './components/client-sidebar-list/cli
 import { ApiService } from './services/api.service';
 import { OrderFormComponent } from './components/order-form/order-form.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
+import { registerLocaleData } from '@angular/common';
+import localeLt from '@angular/common/locales/lt';
+
+registerLocaleData(localeLt, "lt");
 
 @NgModule({
   declarations: [
@@ -32,6 +36,8 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
     { provide: APP_INITIALIZER, useFactory: appInitializer, multi: true, deps: [AuthService] },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true, deps: [HttpClient] },
+    { provide: DEFAULT_CURRENCY_CODE, useValue: "EUR"},
+    { provide: LOCALE_ID, useValue: "lt" }
   ],
   bootstrap: [AppComponent],
 })

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AlertController, ViewDidEnter, ViewWillEnter } from '@ionic/angular';
+import { AlertController, ModalController, ViewDidEnter, ViewWillEnter } from '@ionic/angular';
+import { AddReviewModalComponent } from 'src/app/components/add-review-modal/add-review-modal.component';
 import Order from 'src/app/models/Order';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
@@ -25,7 +26,8 @@ export class OrderPage implements OnInit, ViewWillEnter {
     private router: Router,
     private alertController: AlertController,
     private ionLoaderService: IonLoaderService,
-    private ionToastService: IonToastService) { }
+    private ionToastService: IonToastService,
+    private modalController: ModalController) { }
 
   async ionViewWillEnter() {
     if (this.order) {
@@ -35,12 +37,16 @@ export class OrderPage implements OnInit, ViewWillEnter {
 
   async ngOnInit() {
     await this.ionLoaderService.load(true);
-    this.providerLooking = (this.authService.userValue != null && this.authService.userValue.role != null && this.authService.userValue.role.includes("Provider"));
+    this.providerLooking = (this.authService.userValue != null && 
+      this.authService.userValue.role != null && 
+      (this.authService.userValue.role.includes("Provider") || this.authService.userValue.role.includes("Company") || this.authService.userValue.role.includes("CompanyWorker")));
     this.route.params.subscribe(params => {
       this.orderId = params['id'];
     });
     this.apiService.get(`bookings/${this.orderId}`).subscribe((response: any) => {
       this.order = response;
+      
+      console.log(this.order);
       this.getAddress();
       this.ionLoaderService.load(false);
     });
@@ -135,5 +141,21 @@ export class OrderPage implements OnInit, ViewWillEnter {
       window.location.href = response.checkoutUrl;
       this.ionLoaderService.load(false);
     });
+  }
+
+  async openAddReviewModal() {
+    const modal = await this.modalController.create({
+      component: AddReviewModalComponent,
+      componentProps: {
+        orderId: this.orderId
+      }
+    });
+    modal.onDidDismiss().then((result) => {
+      if (result.data) {
+        this.order = result.data;
+      }
+    });
+
+    return await modal.present();
   }
 }
