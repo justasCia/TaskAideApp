@@ -37,15 +37,15 @@ export class OrderPage implements OnInit, ViewWillEnter {
 
   async ngOnInit() {
     await this.ionLoaderService.load(true);
-    this.providerLooking = (this.authService.userValue != null && 
-      this.authService.userValue.role != null && 
+    this.providerLooking = (this.authService.userValue != null &&
+      this.authService.userValue.role != null &&
       (this.authService.userValue.role.includes("Provider") || this.authService.userValue.role.includes("Company") || this.authService.userValue.role.includes("CompanyWorker")));
     this.route.params.subscribe(params => {
       this.orderId = params['id'];
     });
     this.apiService.get(`bookings/${this.orderId}`).subscribe((response: any) => {
       this.order = response;
-      
+
       console.log(this.order);
       this.getAddress();
       this.ionLoaderService.load(false);
@@ -89,6 +89,31 @@ export class OrderPage implements OnInit, ViewWillEnter {
           },
         },
       ],
+    });
+    await alert.present();
+  }
+
+  async openCancelOrderModal() {
+    const alert = await this.alertController.create({
+      header: 'Kokio tipo atšaukimą darysite?',
+      buttons: [
+        {
+          text: 'Be dalinio mokėjimo',
+          handler: () => {
+            this.cancel();
+          },
+        },
+        {
+          text: 'Su daliniu mokėjimu',
+          handler: () => {
+            this.router.navigate(['/orders', this.orderId, 'edit'], { queryParams: { cancelWithPartialPayment: true } });
+          },
+        },
+        {
+          text: 'Atgal'
+        },
+      ],
+      cssClass: 'custom-alert-button-layout'
     });
     await alert.present();
   }

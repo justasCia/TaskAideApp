@@ -14,3 +14,12 @@ h2 {
     margin-top: 20px;
     margin-bottom: 10px;
 }
+
+.custom-alert-button-layout .alert-button-group {
+    display: flex;
+    flex-direction: row;
+}
+
+.custom-alert-button-layout .alert-button-group button {
+    width: 150px;
+}

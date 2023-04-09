@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProviderReport } from 'src/app/models/reports/ProviderReport';
 import { ApiService } from 'src/app/services/api.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-provider-report',

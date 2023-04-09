@@ -1,21 +1,14 @@
-<!-- <ion-grid>
-  <ion-row class="ion-align-items-center">
-    <ion-col size="1">
-      <ion-icon name="person"></ion-icon>
-    </ion-col>
-    <ion-col>
-      <h3>{{user.firstName}} {{user.lastName}}</h3>
-      <p>{{user.email}}<p>
-    </ion-col>
-  </ion-row>
-</ion-grid> -->
-
 <ion-item lines="none" (click)="toggleDropdown()" class="ion-no-padding ion-item-height user">
   <ion-avatar slot="start">
     <img src="https://icon-library.com/images/avatar-icon-images/avatar-icon-images-4.jpg">
   </ion-avatar>
   <ion-label class="ion-padding-start">
-    <h2 class="ion-text-wrap">{{user.firstName}} {{user.lastName}}</h2>
+    <ng-container *ngIf="!user.companyName; else company">
+      <h2 class="ion-text-wrap">{{user.firstName}} {{user.lastName}}</h2>
+    </ng-container>
+    <ng-template #company>
+      <h2 class="ion-text-wrap">{{user.companyName}}</h2>
+    </ng-template>
   </ion-label>
   <ion-icon slot="end" [name]="dropdownIcon"></ion-icon>
 </ion-item>
@@ -23,10 +16,6 @@
   <ion-item [routerLink]="['/profile']" routerLinkActive="selected">
     <ion-icon name="person" slot="start"></ion-icon>
     <ion-label>Profilis</ion-label>
-  </ion-item>
-  <ion-item [routerLink]="['/folder/settings']" routerLinkActive="selected">
-    <ion-icon name="settings" slot="start"></ion-icon>
-    <ion-label>Nustatymai</ion-label>
   </ion-item>
   <ion-item (click)="logout()" routerLink>
     <ion-icon name="log-out" slot="start"></ion-icon>

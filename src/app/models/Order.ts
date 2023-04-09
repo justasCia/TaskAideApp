@@ -7,8 +7,9 @@ import User from "./User";
 export default interface Order {
   review: Review | null;
   id: number;
-  client: User
-  provider: Provider
+  client: User;
+  provider: Provider;
+  worker?: Provider;
   services: {
     id: number;
     price: number;

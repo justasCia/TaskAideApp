@@ -4,5 +4,5 @@ export default interface User {
     lastName: string;
     email: string;
     phoneNumber: string;
-    companyName: string;
+    companyName?: string;
 }

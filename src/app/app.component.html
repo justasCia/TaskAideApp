@@ -10,8 +10,9 @@
             <ng-container *ngFor="let role of user.role">
               <ng-container [ngSwitch]="role">
                 <app-client-sidebar-list *ngSwitchCase="'Client'"></app-client-sidebar-list>
-                <app-worker-sidebar-list *ngSwitchCase="'Provider'"></app-worker-sidebar-list>
-                <app-worker-sidebar-list *ngSwitchCase="'Company'"></app-worker-sidebar-list>
+                <app-worker-sidebar-list *ngSwitchCase="'Provider'" [role]="role"></app-worker-sidebar-list>
+                <app-worker-sidebar-list *ngSwitchCase="'Company'" [role]="role"></app-worker-sidebar-list>
+                <app-worker-sidebar-list *ngSwitchCase="'CompanyWorker'" [role]="role"></app-worker-sidebar-list>
               </ng-container>
             </ng-container>
           </ion-menu-toggle>

@@ -20,7 +20,7 @@
             <h3>{{order.client.phoneNumber}}</h3>
           </ion-col>
           <ion-col sizeSm="12" sizeMd="6">
-            <h1>Darbuotojas:</h1>
+            <h1>Teikėjas:</h1>
             <h2>
               <ng-container *ngIf="!order.provider.companyName; else company"> {{ order.provider.firstName }} {{
                 order.provider.lastName }}</ng-container>
@@ -28,6 +28,12 @@
             </h2>
             <h3>{{order.provider.email}}</h3>
             <h3>{{order.provider.phoneNumber}}</h3>
+            <ng-container *ngIf="order.worker">
+              <h1>Paskirtas darbuotojas:</h1>
+              <h2>{{ order.worker.firstName }} {{order.worker.lastName }}</h2>
+              <h3>{{order.worker.email}}</h3>
+              <h3>{{order.worker.phoneNumber}}</h3>
+            </ng-container>
           </ion-col>
         </ion-row>
         <ion-row>
@@ -143,7 +149,8 @@
           </ion-row>
           <ion-row *ngSwitchCase="'Confirmed'">
             <ion-col>
-              <ion-button [routerLink]="['/orders', order.id, 'edit']">Užbaigti darbus ir paruošti sąskaitą</ion-button>
+              <ion-button [routerLink]="['/orders', order.id, 'edit']">Užbaigti darbą</ion-button>
+              <ion-button (click)="openCancelOrderModal()">Atšaukti darbą</ion-button>
             </ion-col>
           </ion-row>
         </ng-container>

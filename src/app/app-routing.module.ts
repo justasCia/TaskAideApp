@@ -43,14 +43,21 @@ const routes: Routes = [
     path: 'profile',
     canActivate: [UserAuthenticatedGuard],
     loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule)
-  },  {
-    path: 'provider-report',
+  },
+  {
+    path: 'report',
+    canActivate: [UserAuthenticatedGuard],
     loadChildren: () => import('./pages/provider-report/provider-report.module').then( m => m.ProviderReportPageModule)
   },
   {
     path: 'workers',
+    canActivate: [UserAuthenticatedGuard],
     loadChildren: () => import('./pages/workers/workers.module').then( m => m.WorkersPageModule)
+  },  {
+    path: 'worker-report',
+    loadChildren: () => import('./pages/worker-report/worker-report.module').then( m => m.WorkerReportPageModule)
   },
+
 
 
 

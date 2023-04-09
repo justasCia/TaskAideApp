@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import Order from 'src/app/models/Order';
+import User from 'src/app/models/User';
+import Provider from 'src/app/models/Provider';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { IonLoaderService } from 'src/app/services/ion-loader.service';
@@ -17,6 +19,9 @@ export class EditPage implements OnInit {
   orderId: number;
   orderAddress: string;
   providerLooking: boolean = false;
+  companyLooking: boolean = false;
+  dropdownOptions: User[] = []
+  cancelWithPartialPayment: boolean = false;
 
   materialPricesValidationSucessfull: boolean = true;
   servicesValidationSucessfull: boolean = true;
@@ -30,19 +35,33 @@ export class EditPage implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
+    this.cancelWithPartialPayment = this.route.snapshot.queryParams['cancelWithPartialPayment'];
     this.ionLoaderService.load(true).then(() => {
-      this.providerLooking = (this.authService.userValue != null && 
-        this.authService.userValue.role != null && 
+      this.providerLooking = (this.authService.userValue != null &&
+        this.authService.userValue.role != null &&
         (this.authService.userValue.role.includes("Provider") || this.authService.userValue.role.includes("Company") || this.authService.userValue.role.includes("CompanyWorker")));
+      this.companyLooking = (this.authService.userValue != null &&
+        this.authService.userValue.role != null &&
+        this.authService.userValue.role.includes("Company"));
       this.route.params.subscribe(params => {
         this.orderId = params['id'];
       });
+      
       this.apiService.get(`bookings/${this.orderId}`).subscribe((response: any) => {
         this.order = response
         this.getAddress();
         this.ionLoaderService.load(false);
       });
+      if (this.companyLooking) {
+        this.apiService.get('company/users').subscribe((workers: any) => {
+          this.dropdownOptions = workers;
+        })
+      }
     });
+  }
+
+  compareWith(o1: Provider, o2: Provider) {
+    return o1 && o1.id == o2.id;
   }
 
   getAddress() {
@@ -75,6 +94,14 @@ export class EditPage implements OnInit {
     }
   }
 
+  formatDate(dateString: string): string {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    return `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day}`;
+  }
+
   async sendBill() {
     if (this.providerLooking && this.order.status == "Confirmed") {
       if (!this.validPrices()) {
@@ -83,9 +110,11 @@ export class EditPage implements OnInit {
       await this.ionLoaderService.load(true);
       this.apiService.put(`Bookings/${this.orderId}/services`, this.order.services).subscribe(responseOrder => {
         this.apiService.put(`Bookings/${this.orderId}/materialPrices`, this.order.materialPrices).subscribe(responseOrder => {
-          this.apiService.put(`Bookings/${this.orderId}/status`, "Completed").subscribe(responseOrder => {
+          const status = this.cancelWithPartialPayment ? 'CancelledWithPartialPayment' : 'Completed'
+          this.apiService.put(`Bookings/${this.orderId}/status`, status).subscribe(responseOrder => {
             this.ionLoaderService.load(false);
-            this.ionToastService.showSuccess("Darbas pažymėtas kaip atliktas, sąskaita klientui išsiųsta");
+            const toastMessageStatus = this.cancelWithPartialPayment ? 'atšauktas su daliniu mokėjimu' : 'atliktas'
+            this.ionToastService.showSuccess(`Darbas pažymėtas kaip ${toastMessageStatus}, sąskaita klientui išsiųsta`);
             this.router.navigate([`/orders/${this.orderId}`]);
           })
         })
@@ -111,5 +140,12 @@ export class EditPage implements OnInit {
       }
     }
     return true;
+  }
+
+  assignWorker(event: Event) {
+    const target = event.target as HTMLInputElement;
+    const worker = target.value as any;
+    console.log(target.value);
+    this.apiService.post(`bookings/${this.orderId}/worker?workerId=${worker.id}`, {}).subscribe();
   }
 }

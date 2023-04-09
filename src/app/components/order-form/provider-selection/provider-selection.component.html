@@ -2,8 +2,22 @@
   <ion-radio-group [(ngModel)]="selectedProvider">
     <ion-item *ngFor="let provider of providers" (click)="selectProvider(provider)" lines="none">
       <ion-label>
-        <h2>{{ provider.firstName }} {{ provider.lastName }}</h2>
-        <p>{{ provider.description }}</p>
+        <h2>
+          <ng-container *ngIf="!provider.companyName; else company">
+            {{ provider.firstName }} {{ provider.lastName }}
+          </ng-container>
+          <ng-template #company>
+            {{provider.companyName}}
+          </ng-template>
+        </h2>
+        <p>
+          <ng-container *ngIf="provider.reviewCount > 0">
+            <ion-icon name="star" [style.color]="'#ffd700'"></ion-icon>
+            {{provider.rating}}/5
+            <ion-icon name="chatbox-ellipses"></ion-icon>
+            {{provider.reviewCommentsCount}}
+          </ng-container>
+        </p>
       </ion-label>
       <ion-radio slot="start"></ion-radio>
     </ion-item>

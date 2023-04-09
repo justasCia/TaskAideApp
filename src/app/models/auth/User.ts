@@ -5,4 +5,5 @@ export class User {
     role?: string[];
     accessToken?: string;
     expires?: Date;
+    companyName?: string;
 }
