@@ -56,7 +56,12 @@
   <ion-item>
     <ion-label>
       <h2>
-        {{orderFormService.selectedProvider!.firstName}} {{orderFormService.selectedProvider!.lastName}}
+        <ng-container *ngIf="!orderFormService.selectedProvider!.companyName; else company">
+          {{ orderFormService.selectedProvider!.firstName }} {{ orderFormService.selectedProvider!.lastName }}
+        </ng-container>
+        <ng-template #company>
+          {{orderFormService.selectedProvider!.companyName}}
+        </ng-template>
       </h2>
       <p>{{orderFormService.selectedProvider!.phoneNumber}}</p>
     </ion-label>

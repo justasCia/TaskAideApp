@@ -2,6 +2,7 @@ import { formatDate } from '@angular/common';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import AdditionalInfo from 'src/app/models/orders/AdditionalInfo';
 import Location from '../../../models/Location';
+import { OrderFormService } from 'src/app/services/order-form.service';
 
 
 @Component({
@@ -33,18 +34,21 @@ export class AdditionalInfoSelectionComponent implements OnInit {
     this.additionalInfo.address = address;
   }
 
-  constructor() {
+  constructor(private orderService: OrderFormService) {
+  }
+
+  ngOnInit() {
     const today = new Date();
     this.minStartDate = formatDate(today, 'YYYY-MM-dd', 'en');
     this.maxStartDate = '2100-12-31';
     this.minEndDate = this.minStartDate;
     this.maxEndDate = '2100-12-31';
-    this.additionalInfo.startDate = this.minStartDate;
-    this.additionalInfo.endDate = this.minStartDate; // set initial value to minStartDate
-  }
-
-  ngOnInit() {
-
+    if (this.orderService.additionalInfo) {
+      this.additionalInfo = this.orderService.additionalInfo;
+    } else {
+      this.additionalInfo.startDate = this.minStartDate;
+      this.additionalInfo.endDate = this.minStartDate; // set initial value to minStartDate
+    }
   }
 
   onStartDateChange() {

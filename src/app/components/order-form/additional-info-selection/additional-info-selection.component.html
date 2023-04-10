@@ -1,26 +1,57 @@
 <ion-list class="booking-form" lines="none">
   <ion-item>
-    <ion-label position="stacked">Vieta</ion-label>
-    <app-location-input (location)="setAddress($event)"></app-location-input>
+    <ion-label position="stacked">
+      <h1>
+        <ion-icon name="location"></ion-icon>
+        Vieta
+      </h1>
+    </ion-label>
+    <app-location-input style="width: 100%;" [inputLocation]="this.additionalInfo.address || undefined" (location)="setAddress($event)"></app-location-input>
   </ion-item>
   <ion-item>
-    <ion-label position="stacked">Įveskite norimą pradžios datą</ion-label>
-    <ion-datetime presentation="date" locale="lt-LT" min={{minStartDate}} max={{maxStartDate}}
-      displayFormat="MMM D, YYYY" [(ngModel)]="additionalInfo.startDate" (ionChange)="onStartDateChange()">
-    </ion-datetime>
+    <ion-label position="stacked">
+      <h1>
+        <ion-icon name="calendar"></ion-icon>
+        Pradžios data
+      </h1>
+    </ion-label>
+    <ion-input value="{{ additionalInfo.startDate | date: 'YYYY-MM-dd' }}" id="startDate"></ion-input>
+    <ion-popover size="cover" trigger="startDate">
+      <ng-template>
+          <ion-datetime presentation="date" locale="lt-LT" min={{minStartDate}} max={{maxStartDate}}
+            displayFormat="MMM D, YYYY" [(ngModel)]="additionalInfo.startDate" (ionChange)="onStartDateChange()">
+          </ion-datetime>
+      </ng-template>
+    </ion-popover>
   </ion-item>
   <ion-item>
-    <ion-label position="stacked">Įveskite norimą pabaigos datą</ion-label>
-    <ion-datetime presentation="date" locale="lt-LT" min={{minEndDate}} max={{maxEndDate}} displayFormat="MMM D, YYYY"
-      [(ngModel)]="additionalInfo.endDate" (ionChange)="onEndDateChange()"> </ion-datetime>
+    <ion-label position="stacked">
+      <h1>
+        <ion-icon name="calendar"></ion-icon>
+        Pabaigos data
+      </h1>
+    </ion-label>
+    <ion-input value="{{ additionalInfo.endDate | date: 'YYYY-MM-dd' }}" id="endDate"></ion-input>
+    <ion-popover size="cover" trigger="endDate">
+      <ng-template>
+        <ion-datetime presentation="date" locale="lt-LT" min={{minEndDate}} max={{maxEndDate}}
+          displayFormat="MMM D, YYYY" [(ngModel)]="additionalInfo.endDate" (ionChange)="onEndDateChange()">
+        </ion-datetime>
+      </ng-template>
+    </ion-popover>
   </ion-item>
   <ion-item>
-    <ion-label position="stacked">Papildoma informacija</ion-label>
+    <ion-label position="stacked">
+      <h1>
+        <ion-icon name="information-circle"></ion-icon>
+        Papildoma informacija
+      </h1>
+    </ion-label>
     <ion-textarea rows="6" [(ngModel)]="additionalInfo.additionalInformation"></ion-textarea>
   </ion-item>
-  <ion-item>
+  <!-- <ion-item>
     <ion-label position="stacked">Nuotraukos</ion-label>
     <ion-input type="file" accept="image/*" (change)="onPictureSelect($event)" multiple></ion-input>
-  </ion-item>
+  </ion-item> -->
 </ion-list>
 <ion-button expand="block" (click)="collectAditionalInfo()">Toliau</ion-button>

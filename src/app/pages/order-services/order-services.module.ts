@@ -15,6 +15,7 @@ import { CategoryComponent } from 'src/app/components/category/category.componen
 import { ProviderSelectionComponent } from 'src/app/components/order-form/provider-selection/provider-selection.component';
 import { OrderApprovalComponent } from 'src/app/components/order-form/order-approval/order-approval.component';
 import { LocationInputModule } from 'src/app/components/location-input/location-input.module';
+import { ProviderModalComponent } from 'src/app/components/provider-modal/provider-modal.component';
 
 @NgModule({
   imports: [
@@ -33,6 +34,7 @@ import { LocationInputModule } from 'src/app/components/location-input/location-
     ProviderSelectionComponent,
     CategoryComponent,
     OrderApprovalComponent,
+    ProviderModalComponent
   ]
 })
 export class OrderServicesPageModule {}
