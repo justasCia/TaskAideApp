@@ -1,5 +1,6 @@
 <ion-list>
   <ion-radio-group [(ngModel)]="selectedProvider">
+    <ng-container *ngIf="providers && providers.length == 0">Nerasta tiekėjų pagal jūsų reikalavimus.</ng-container>
     <ion-item *ngFor="let provider of providers" (click)="selectProvider(provider)" lines="none">
       <ion-label>
         <h2>

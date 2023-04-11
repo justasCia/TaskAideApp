@@ -1,22 +1,30 @@
-<ion-content class="ion-padding">
-  <ng-container *ngIf="orderFormService.step === 1">
-    <app-category-selection (categorySelected)="selectCategory($event)"></app-category-selection>
+<ion-content class="ion-padding success-message">
+  <ng-container *ngIf="successOrder; else ordering">
+    <div class="success-message">
+      <h2>Užsakymas sėkmingas!</h2>
+      <p>Galite peržiūrėti savo užsakymą <a [routerLink]="['/orders', orderId!]">čia</a>.</p>
+      <ion-button expand="block" color="primary" (click)="startNewOrder()">Naujas užsakymas</ion-button>
+    </div>
   </ng-container>
-  <ng-container *ngIf="orderFormService.step === 2">
-    <app-services-selection [selectedCategory]="orderFormService.selectedCategory"
-      (servicesSelected)="selectServices($event)"></app-services-selection>
-  </ng-container>
-  <ng-container *ngIf="orderFormService.step === 3">
-    <app-additional-info-selection (infoSubmitted)="collectAdditionalInformation($event)"></app-additional-info-selection>
-  </ng-container>
-  <ng-container *ngIf="orderFormService.step === 4">
-    <app-provider-selection (provider)="selectProvider($event)" (order)="order()"></app-provider-selection>
-  </ng-container>
-  <ng-container *ngIf="orderFormService.step === 5">
-    <app-order-approval (order)="order()"></app-order-approval>
-  </ng-container>
-
-  <ng-container *ngIf="orderFormService.step > 1">
-    <ion-button expand="block" color="danger" (click)="previousStep()">Atgal</ion-button>
-  </ng-container>
+  <ng-template #ordering>
+    <ng-container *ngIf="orderFormService.step === 1">
+      <app-category-selection (categorySelected)="selectCategory($event)"></app-category-selection>
+    </ng-container>
+    <ng-container *ngIf="orderFormService.step === 2">
+      <app-services-selection [selectedCategory]="orderFormService.selectedCategory"
+        (servicesSelected)="selectServices($event)"></app-services-selection>
+    </ng-container>
+    <ng-container *ngIf="orderFormService.step === 3">
+      <app-additional-info-selection (infoSubmitted)="collectAdditionalInformation($event)"></app-additional-info-selection>
+    </ng-container>
+    <ng-container *ngIf="orderFormService.step === 4">
+      <app-provider-selection (provider)="selectProvider($event)" (order)="order()"></app-provider-selection>
+    </ng-container>
+    <ng-container *ngIf="orderFormService.step === 5">
+      <app-order-approval (order)="order()"></app-order-approval>
+    </ng-container>
+    <ng-container *ngIf="orderFormService.step > 1">
+      <ion-button expand="block" color="danger" (click)="previousStep()">Atgal</ion-button>
+    </ng-container>
+  </ng-template>
 </ion-content>

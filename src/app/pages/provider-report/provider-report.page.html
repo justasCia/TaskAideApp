@@ -12,6 +12,49 @@
   <ion-grid *ngIf="report">
     <ion-row>
       <ion-col size="12">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>
+              Pasirinkite filtrus
+            </ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-grid>
+              <ion-row>
+                <ion-col size="6">
+                  <ion-item>
+                    <ion-label position="stacked">Nuo</ion-label>
+                    <ion-input value="{{ startDate | date: 'YYYY-MM-dd' }}" id="startDate"></ion-input>
+                    <ion-popover trigger="startDate">
+                      <ng-template>
+                        <ion-datetime presentation="date" locale="lt-LT" [(ngModel)]="startDate"></ion-datetime>
+                      </ng-template>
+                    </ion-popover>
+                  </ion-item>
+                </ion-col>
+                <ion-col size="6">
+                  <ion-item>
+                    <ion-label position="stacked">Iki</ion-label>
+                    <ion-input value="{{ endDate | date: 'YYYY-MM-dd' }}" id="endDate"></ion-input>
+                    <ion-popover trigger="endDate">
+                      <ng-template>
+                        <ion-datetime presentation="date" locale="lt-LT" [(ngModel)]="endDate"></ion-datetime>
+                      </ng-template>
+                    </ion-popover>
+                  </ion-item>
+                </ion-col>
+                <ion-col>
+                  <ion-button (click)="getProviderReport()"><ion-icon name="filter"></ion-icon>Filtruoti</ion-button>
+                  <ion-button (click)="clearFilters()"><ion-icon name="refresh"></ion-icon>Valyti filtus</ion-button>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">
         <ion-card class="ion-text-center">
           <ion-card-header>
             <ion-card-title>

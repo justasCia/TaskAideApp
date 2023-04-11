@@ -44,8 +44,8 @@
                   </ion-item>
                 </ion-col>
                 <ion-col>
-                  <ion-button><ion-icon name="filter"></ion-icon>Filtruoti</ion-button>
-                  <ion-button><ion-icon name="refresh"></ion-icon>Valyti filtus</ion-button>
+                  <ion-button (click)="getWorkerReport()"><ion-icon name="filter"></ion-icon>Filtruoti</ion-button>
+                  <ion-button (click)="clearFilters()"><ion-icon name="refresh"></ion-icon>Valyti filtus</ion-button>
                 </ion-col>
               </ion-row>
             </ion-grid>

@@ -12,6 +12,8 @@ import { IonLoaderService } from 'src/app/services/ion-loader.service';
   styleUrls: ['./order-form.component.scss'],
 })
 export class OrderFormComponent implements OnInit {
+  successOrder: boolean = false;
+  orderId?: number;
 
   constructor(public orderFormService: OrderFormService, private ionLoaderService: IonLoaderService) { }
 
@@ -37,10 +39,17 @@ export class OrderFormComponent implements OnInit {
 
   order() {
     this.ionLoaderService.load(true);
-    this.orderFormService.order().subscribe(response => {
+    this.orderFormService.order().subscribe((response: any) => {
+      this.orderId = response.id;
+      this.successOrder = true;
       this.ionLoaderService.load(false);
     });
   }
-  ngOnInit() {}
+
+  startNewOrder() {
+    this.orderFormService.clear();
+    this.successOrder = false;
+  }
+  ngOnInit() { }
 
 }

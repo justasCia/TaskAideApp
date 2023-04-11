@@ -13,7 +13,7 @@ export class OrderFormService {
   step = 1;
   selectedCategory: Category;
   selectedServices: Service[] = [];
-  additionalInfo: AdditionalInfo;
+  additionalInfo?: AdditionalInfo;
   selectedProvider?: Provider;
 
   constructor(private apiService: ApiService) { }
@@ -40,10 +40,17 @@ export class OrderFormService {
   order() {
     const bookigOrder: PostOrder = {
       services: this.selectedServices.map(s => ({ service: s })),
-      ...this.additionalInfo,
+      ...this.additionalInfo!,
       providerId: this.selectedProvider!.id
     };
     return this.apiService.post("bookings", bookigOrder);
+  }
+
+  clear() {
+    this.step = 1;
+    this.selectedServices = [];
+    this.selectedProvider = undefined;
+    this.additionalInfo = undefined;
   }
 
   previousStep() {

@@ -22,7 +22,7 @@ export class WorkerSidebarListComponent implements OnInit {
     { title: 'Vykdomi darbai', url: '/orders', queryParams: { status: "confirmed" }, icon: 'clipboard' },
     { title: 'Visi darbai', url: '/orders', icon: 'list' },
     { title: 'Ataskaita', url: '/report', icon: 'barcode' },
-    { title: 'Daruotojai', url: '/workers', icon: 'people' },
+    { title: 'Darbuotojai', url: '/workers', icon: 'people' },
   ]
 
   public companyWorkerPages = [

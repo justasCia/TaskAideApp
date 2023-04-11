@@ -5,6 +5,7 @@ import { OrderFormService } from 'src/app/services/order-form.service';
 import OrderRequest from '../../../models/orders/OrderRequest';
 import { ModalController } from '@ionic/angular';
 import { ProviderModalComponent } from '../../provider-modal/provider-modal.component';
+import { IonLoaderService } from 'src/app/services/ion-loader.service';
 
 @Component({
   selector: 'app-provider-selection',
@@ -19,16 +20,18 @@ export class ProviderSelectionComponent implements OnInit {
 
   @Output() provider = new EventEmitter<Provider>();
 
-  constructor(private apiService: ApiService, private orderFormService: OrderFormService, private modalController: ModalController) { }
+  constructor(private apiService: ApiService, private orderFormService: OrderFormService, private modalController: ModalController, private ionLoaderService: IonLoaderService) { }
 
-  getAvailableProviders() {
+  async getAvailableProviders() {
+    await this.ionLoaderService.load(true);
     const services = this.orderFormService.selectedServices.map(s => ({ service: s }));
     const requestBody: OrderRequest = {
-      ...this.orderFormService.additionalInfo,
+      ...this.orderFormService.additionalInfo!,
       services: services,
     }
     this.apiService.post("bookings/providers", requestBody).subscribe((response: Provider[]) => {
       this.providers = response;
+      this.ionLoaderService.load(false);
     });
   }
 

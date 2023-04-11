@@ -15,7 +15,7 @@ export class OrderApprovalComponent implements OnInit {
   constructor(public orderFormService: OrderFormService, private locationService: LocationService) { }
 
   ngOnInit() {
-    this.locationService.getAddress(this.orderFormService.additionalInfo.address!).then(address => {
+    this.locationService.getAddress(this.orderFormService.additionalInfo!.address!).then(address => {
       this.address = address;
     });
     //this.getAddress();
@@ -27,7 +27,7 @@ export class OrderApprovalComponent implements OnInit {
 
   getAddress() {
     const geocoder = new google.maps.Geocoder();
-    const address = this.orderFormService.additionalInfo.address;
+    const address = this.orderFormService.additionalInfo!.address;
     const latlng = {
       lat: address!.y,
       lng: address!.x,

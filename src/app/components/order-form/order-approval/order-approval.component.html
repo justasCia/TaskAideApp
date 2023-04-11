@@ -32,17 +32,17 @@
         Norima data
       </h2>
       <p>
-        Nuo {{orderFormService.additionalInfo.startDate}} iki {{orderFormService.additionalInfo.endDate}}
+        Nuo {{orderFormService.additionalInfo!.startDate}} iki {{orderFormService.additionalInfo!.endDate}}
       </p>
     </ion-label>
   </ion-item>
-  <ion-item *ngIf="orderFormService.additionalInfo.additionalInformation">
+  <ion-item *ngIf="orderFormService.additionalInfo!.additionalInformation">
     <ion-label>
       <h2>
         Papildoma informacija
       </h2>
       <p>
-        {{orderFormService.additionalInfo.additionalInformation}}
+        {{orderFormService.additionalInfo!.additionalInformation}}
       </p>
     </ion-label>
   </ion-item>
