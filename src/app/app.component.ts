@@ -22,7 +22,9 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.authService.userValue;
-    if (this.user && this.user?.role?.includes("Provider")) {
+    const isProvider = this.user && this.user?.role?.includes("Provider");
+    const isCompany = this.user && this.user?.role?.includes("Company");
+    if (isProvider || isCompany) {
       this.apiService.get("provider/information").subscribe({
         next: (provider: any) => {
           if (!provider.bankAccount) {
@@ -31,7 +33,8 @@ export class AppComponent implements OnInit {
         },
         error: error => {
           if (error.status === 404) {
-            this.ionToastService.showWarning("Nesate pridėję reikiamos darbuotojo informacijos, norint dirbti, tai galite padaryti nuėjė į savo profilį", true);
+            const word = isProvider ? "darbuotojo" : "kompanijos";
+            this.ionToastService.showWarning(`Nesate pridėję reikiamos ${word} informacijos, norint dirbti, tai galite padaryti nuėjė į savo profilį`, true);
           }
         }
       })

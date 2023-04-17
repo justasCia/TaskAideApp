@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ProviderReport } from 'src/app/models/reports/ProviderReport';
 import { ApiService } from 'src/app/services/api.service';
@@ -14,6 +15,7 @@ export class ProviderReportPage implements OnInit {
   isExpanded = false;
   startDate?: Date;
   endDate?: Date;
+  providerActivated: boolean = true;
 
   constructor(private apiService: ApiService, private ionLoaderService: IonLoaderService) { }
 
@@ -38,12 +40,20 @@ export class ProviderReportPage implements OnInit {
       url += `?endDate=${new Date(this.endDate).toISOString()}`;
     }
 
-    this.apiService.get(url).subscribe((response: any) => {
-      this.report = response;
-      this.ionLoaderService.load(false);
+    this.apiService.get(url).subscribe({
+      next: (response: any) => {
+        this.report = response;
+        this.ionLoaderService.load(false);
+      },
+      error: (error: HttpErrorResponse) => {
+        if (error.error && error.status === 404) {
+          this.providerActivated = false;
+        }
+        this.ionLoaderService.load(false);
+      }
     });
   }
 
-  
+
 
 }

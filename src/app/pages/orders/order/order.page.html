@@ -129,7 +129,7 @@
         </ion-row>
         <ion-row>
           <ion-col size="12">
-            <h1>Statusas: {{order.status}}</h1>
+            <h1>Statusas: {{getBookingStatusInLithuanian()}}</h1>
           </ion-col>
           <ion-col size="12" *ngIf="order.status == 'Completed' || order.status == 'CancelledWithPartialPayment'">
             <h1>Apmokėjimo statusas: {{order.paid ? 'Apmokėta' : 'Neapmokėta'}}</h1>

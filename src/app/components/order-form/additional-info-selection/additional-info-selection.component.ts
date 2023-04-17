@@ -30,7 +30,7 @@ export class AdditionalInfoSelectionComponent implements OnInit {
     this.infoSubmitted.emit(this.additionalInfo);
   }
 
-  setAddress(address: Location) {
+  setAddress(address?: Location) {
     this.additionalInfo.address = address;
   }
 

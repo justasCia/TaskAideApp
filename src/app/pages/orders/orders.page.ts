@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { url } from 'inspector';
 import { Observable } from 'rxjs';
+import { translateBookingStatusToLithuanian } from 'src/app/helpers/orderStatusTranslator';
 import { User } from 'src/app/models/auth/User';
 import Order from 'src/app/models/Order';
 import { ApiService } from 'src/app/services/api.service';
@@ -49,10 +50,15 @@ export class OrdersPage implements OnInit {
     return services.slice(0, -2);
   }
 
+  getBookingStatusInLithuanian(order: Order): string {
+    return translateBookingStatusToLithuanian(order.status);
+  }
+
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
       let url = "bookings";
       const status = params["status"];
+      const paid = params["paid"];
       if (status) {
         switch (status) {
           case "pending":
@@ -64,13 +70,19 @@ export class OrdersPage implements OnInit {
           case "confirmed":
             url += "?status=Confirmed";
             break;
+          case "done":
+            url += "?status=done";
+            break;
           default:
             break;
+        }
+        if (paid) {
+          url += `&paid=${paid as boolean}`
         }
       }
       this.ionLoaderService.load(true).then(() => {
         this.getOrders(url);
-      })
+      });
     });
   }
 }

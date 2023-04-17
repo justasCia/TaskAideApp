@@ -6,6 +6,7 @@ import { Login } from "../models/auth/Login";
 import { Register } from "../models/auth/Register";
 import { ApiService } from './api.service';
 import { toByteArray } from 'base64-js';
+import { RegisterCompany } from '../models/auth/RegisterCompany';
 
 @Injectable({
   providedIn: 'root'
@@ -42,6 +43,10 @@ export class AuthService {
 
   registerProvider(register: Register) {
     return this.apiService.post("auth/registerProvider", register);
+  }
+
+  registerCompany(register: RegisterCompany) {
+    return this.apiService.post("auth/registerCompany", register);
   }
 
   login(login: Login) {

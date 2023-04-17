@@ -8,13 +8,15 @@ import { WorkersPageRoutingModule } from './workers-routing.module';
 
 import { WorkersPage } from './workers.page';
 import { RegisterWorkerModalComponent } from 'src/app/components/register-worker-modal/register-worker-modal.component';
+import { ProviderNotActivatedModule } from 'src/app/components/provider-not-activated/provider-not-activated.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    WorkersPageRoutingModule
+    WorkersPageRoutingModule,
+    ProviderNotActivatedModule
   ],
   declarations: [WorkersPage, RegisterWorkerModalComponent]
 })

@@ -20,7 +20,7 @@
           <ng-container *ngIf="!order.provider.companyName; else company"> {{ order.provider.firstName }} {{ order.provider.lastName }}</ng-container>
           <ng-template #company>{{order.provider.companyName}}</ng-template>
         </p>
-        <p><strong>Statusas:</strong> {{ order.status }}</p>
+        <p><strong>Statusas:</strong> {{ getBookingStatusInLithuanian(order) }}</p>
       </ion-label>
     </ion-item>
   </ion-list>

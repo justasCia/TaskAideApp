@@ -15,6 +15,7 @@ export class LocationInputComponent implements OnInit {
   showList: boolean = false;
 
   @Output() location = new EventEmitter<Location>();
+  @Output() loactionCleared = new EventEmitter<undefined>();
   @Input() inputLocation?: Location;
 
   constructor(private geoCoder: MapGeocoder, private locationService: LocationService) { }
@@ -28,6 +29,7 @@ export class LocationInputComponent implements OnInit {
         this.places = predictions;
       });
     } else {
+      this.loactionCleared.emit(undefined);
       this.places = [];
     }
 

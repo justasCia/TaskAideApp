@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { OrdersPageRoutingModule } from './orders-routing.module';
 
 import { OrdersPage } from './orders.page';
-import { ProviderNotActivatedComponent } from 'src/app/components/provider-not-activated/provider-not-activated.component';
+import { ProviderNotActivatedModule } from 'src/app/components/provider-not-activated/provider-not-activated.module';
 
 @NgModule({
   imports: [
@@ -15,7 +15,8 @@ import { ProviderNotActivatedComponent } from 'src/app/components/provider-not-a
     FormsModule,
     IonicModule,
     OrdersPageRoutingModule,
+    ProviderNotActivatedModule
   ],
-  declarations: [OrdersPage, ProviderNotActivatedComponent]
+  declarations: [OrdersPage]
 })
 export class OrdersPageModule {}

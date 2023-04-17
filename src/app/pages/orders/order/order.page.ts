@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController, ModalController, ViewDidEnter, ViewWillEnter } from '@ionic/angular';
 import { AddReviewModalComponent } from 'src/app/components/add-review-modal/add-review-modal.component';
+import { translateBookingStatusToLithuanian } from 'src/app/helpers/orderStatusTranslator';
 import Order from 'src/app/models/Order';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
@@ -34,7 +35,6 @@ export class OrderPage implements OnInit, ViewWillEnter {
       this.ngOnInit();
     }
   }
-
   async ngOnInit() {
     await this.ionLoaderService.load(true);
     this.providerLooking = (this.authService.userValue != null &&
@@ -50,6 +50,10 @@ export class OrderPage implements OnInit, ViewWillEnter {
       this.getAddress();
       this.ionLoaderService.load(false);
     });
+  }
+
+  getBookingStatusInLithuanian(): string {
+    return translateBookingStatusToLithuanian(this.order.status);
   }
 
   getAddress() {

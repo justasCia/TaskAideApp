@@ -30,6 +30,11 @@ const routes: Routes = [
     loadChildren: () => import('./pages/register-provider/register-provider.module').then( m => m.RegisterProviderPageModule)
   },
   {
+    path: 'register-company',
+    canActivate: [UserAlreadyLoggedInGuard],
+    loadChildren: () => import('./pages/register-company/register-company.module').then( m => m.RegisterCompanyPageModule)
+  },
+  {
     path: 'order-services',
     canActivate: [UserAuthenticatedGuard],
     loadChildren: () => import('./pages/order-services/order-services.module').then( m => m.OrderServicesPageModule)
@@ -53,18 +58,12 @@ const routes: Routes = [
     path: 'workers',
     canActivate: [UserAuthenticatedGuard],
     loadChildren: () => import('./pages/workers/workers.module').then( m => m.WorkersPageModule)
-  },  {
+  },
+  {
     path: 'worker-report',
+    canActivate: [UserAuthenticatedGuard],
     loadChildren: () => import('./pages/worker-report/worker-report.module').then( m => m.WorkerReportPageModule)
   },
-
-
-
-
-  // {
-  //   path: 'orders/:id',
-  //   loadChildren: () => import('./pages/order/order.module').then( m => m.OrderPageModule)
-  // }
 
 
 ];

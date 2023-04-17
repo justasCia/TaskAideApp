@@ -11,6 +11,7 @@
 </ion-header>
 <ion-content>
   <ion-list>
+    <app-provider-not-activated *ngIf="!providerActivated"></app-provider-not-activated>
     <ion-item *ngFor="let worker of workers">
       <ion-label>
         <h2>{{ worker.firstName }} {{ worker.lastName }}</h2>

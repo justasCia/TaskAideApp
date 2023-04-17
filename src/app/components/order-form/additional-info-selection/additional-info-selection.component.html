@@ -6,7 +6,7 @@
         Vieta
       </h1>
     </ion-label>
-    <app-location-input style="width: 100%;" [inputLocation]="this.additionalInfo.address || undefined" (location)="setAddress($event)"></app-location-input>
+    <app-location-input style="width: 100%;" [inputLocation]="this.additionalInfo.address || undefined" (location)="setAddress($event)" (loactionCleared)="setAddress(undefined)"></app-location-input>
   </ion-item>
   <ion-item>
     <ion-label position="stacked">
@@ -16,7 +16,7 @@
       </h1>
     </ion-label>
     <ion-input value="{{ additionalInfo.startDate | date: 'YYYY-MM-dd' }}" id="startDate"></ion-input>
-    <ion-popover size="cover" trigger="startDate">
+    <ion-popover trigger="startDate">
       <ng-template>
           <ion-datetime presentation="date" locale="lt-LT" min={{minStartDate}} max={{maxStartDate}}
             displayFormat="MMM D, YYYY" [(ngModel)]="additionalInfo.startDate" (ionChange)="onStartDateChange()">
@@ -32,7 +32,7 @@
       </h1>
     </ion-label>
     <ion-input value="{{ additionalInfo.endDate | date: 'YYYY-MM-dd' }}" id="endDate"></ion-input>
-    <ion-popover size="cover" trigger="endDate">
+    <ion-popover trigger="endDate">
       <ng-template>
         <ion-datetime presentation="date" locale="lt-LT" min={{minEndDate}} max={{maxEndDate}}
           displayFormat="MMM D, YYYY" [(ngModel)]="additionalInfo.endDate" (ionChange)="onEndDateChange()">
@@ -54,4 +54,4 @@
     <ion-input type="file" accept="image/*" (change)="onPictureSelect($event)" multiple></ion-input>
   </ion-item> -->
 </ion-list>
-<ion-button expand="block" (click)="collectAditionalInfo()">Toliau</ion-button>
+<ion-button expand="block" [disabled]="!this.additionalInfo.address" (click)="collectAditionalInfo()">Toliau</ion-button>

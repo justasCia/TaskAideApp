@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { ProviderReportPageRoutingModule } from './provider-report-routing.module';
 
 import { ProviderReportPage } from './provider-report.page';
+import { ProviderNotActivatedModule } from 'src/app/components/provider-not-activated/provider-not-activated.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ProviderReportPageRoutingModule
+    ProviderReportPageRoutingModule,
+    ProviderNotActivatedModule
   ],
   declarations: [ProviderReportPage]
 })

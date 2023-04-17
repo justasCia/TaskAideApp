@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
+import { Register } from 'src/app/models/auth/Register';
+import { RegisterCompany } from 'src/app/models/auth/RegisterCompany';
 import { AuthService } from 'src/app/services/auth.service';
-import { Register } from '../../models/auth/Register';
 import { IonLoaderService } from 'src/app/services/ion-loader.service';
 
 @Component({
-  selector: 'app-register-provider',
-  templateUrl: './register-provider.page.html',
-  styleUrls: ['./register-provider.page.scss'],
+  selector: 'app-register-company',
+  templateUrl: './register-company.page.html',
+  styleUrls: ['./register-company.page.scss'],
 })
-export class RegisterProviderPage implements OnInit {
-  register: Register = {
-    firstName: '',
-    lastname: '',
+export class RegisterCompanyPage implements OnInit {
+  register: RegisterCompany = {
+    companyName: '',
     email: '',
     phoneNumber: '',
     password: '',
@@ -25,7 +25,7 @@ export class RegisterProviderPage implements OnInit {
 
   async registerWithCredentials() {
     await this.ionLoaderService.load(true);
-    this.authService.registerProvider(this.register).subscribe({
+    this.authService.registerCompany(this.register).subscribe({
       next: () => {
         this.authService.login(this.register).subscribe(response => {
           window.location.href = "/";
