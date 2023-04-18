@@ -35,7 +35,7 @@ registerLocaleData(localeLt, "lt");
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: APP_INITIALIZER, useFactory: appInitializer, multi: true, deps: [AuthService] },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true, deps: [HttpClient] },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: DEFAULT_CURRENCY_CODE, useValue: "EUR"},
     { provide: LOCALE_ID, useValue: "lt" }
   ],

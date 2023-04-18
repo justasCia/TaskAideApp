@@ -3,16 +3,14 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { UserAlreadyLoggedInGuard } from './guards/user-already-logged-in.guard';
 import { UserAuthenticatedGuard } from './guards/user-authenticated.guard';
+import { ProviderGuard } from './guards/provider.guard';
+import { CompanyGuard } from './guards/company.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: WelcomeComponent,
     pathMatch: 'full'
-  },
-  {
-    path: 'folder/:id',
-    loadChildren: () => import('./folder/folder.module').then(m => m.FolderPageModule)
   },
   {
     path: 'login',
@@ -51,12 +49,12 @@ const routes: Routes = [
   },
   {
     path: 'report',
-    canActivate: [UserAuthenticatedGuard],
+    canActivate: [UserAuthenticatedGuard, ProviderGuard],
     loadChildren: () => import('./pages/provider-report/provider-report.module').then( m => m.ProviderReportPageModule)
   },
   {
     path: 'workers',
-    canActivate: [UserAuthenticatedGuard],
+    canActivate: [UserAuthenticatedGuard, CompanyGuard],
     loadChildren: () => import('./pages/workers/workers.module').then( m => m.WorkersPageModule)
   },
   {

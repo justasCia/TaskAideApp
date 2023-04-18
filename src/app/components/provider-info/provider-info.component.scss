@@ -1,0 +1,45 @@
+.booking-form ion-label {
+    color: #495057;
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.booking-form ion-input {
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    padding: 10px 12px;
+    font-size: 16px;
+}
+
+.booking-form ion-button {
+    margin-top: 20px;
+    --background: #007bff;
+    --color: #fff;
+    --border-radius: 4px;
+    --padding-start: 20px;
+    --padding-end: 20px;
+    --padding-top: 12px;
+    --padding-bottom: 12px;
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.booking-form ion-textarea {
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    padding: 10px 12px;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.booking-form .searchbar-input ion-input {
+    font-size: 16px;
+    --padding-start: 10px;
+    --padding-end: 10px;
+}
+
+.services {
+    margin: 0;
+}

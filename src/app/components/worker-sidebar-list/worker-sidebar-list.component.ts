@@ -9,6 +9,7 @@ import { User } from 'src/app/models/auth/User';
 export class WorkerSidebarListComponent implements OnInit {
   @Input() role: string;
   public providerPages = [
+    { title: 'Pagrindinis puslapis', url: '/', icon: 'home' },
     { title: 'Paslaugų užklausos', url: '/orders', queryParams: { status: "pending" }, icon: 'contract' },
     { title: 'Paslaugos derbybų stadijoje', url: '/orders', queryParams: { status: "inNegotiation" }, icon: 'chatbubbles' },
     { title: 'Vykdomi darbai', url: '/orders', queryParams: { status: "confirmed" }, icon: 'clipboard' },
@@ -17,6 +18,7 @@ export class WorkerSidebarListComponent implements OnInit {
   ]
 
   public companyPages = [
+    { title: 'Pagrindinis puslapis', url: '/', icon: 'home' },
     { title: 'Paslaugų užklausos', url: '/orders', queryParams: { status: "pending" }, icon: 'contract' },
     { title: 'Paslaugos derbybų stadijoje', url: '/orders', queryParams: { status: "inNegotiation" }, icon: 'chatbubbles' },
     { title: 'Vykdomi darbai', url: '/orders', queryParams: { status: "confirmed" }, icon: 'clipboard' },
@@ -26,6 +28,7 @@ export class WorkerSidebarListComponent implements OnInit {
   ]
 
   public companyWorkerPages = [
+    { title: 'Pagrindinis puslapis', url: '/', icon: 'home' },
     { title: 'Priskirtos paslaugų užklausos', url: '/orders', queryParams: { status: "pending" }, icon: 'contract' },
     { title: 'Priskirtos paslaugos derbybų stadijoje', url: '/orders', queryParams: { status: "inNegotiation" }, icon: 'chatbubbles' },
     { title: 'Priskirti vykdomi darbai', url: '/orders', queryParams: { status: "confirmed" }, icon: 'clipboard' },

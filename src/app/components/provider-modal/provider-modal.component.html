@@ -11,6 +11,8 @@
         <div class="rating">
           <ion-icon name="star" [style.color]="'#ffd700'"></ion-icon>
           {{provider.rating}}/5
+          <ion-icon name="person"></ion-icon>
+          {{provider.reviewCount}}
           <ion-icon name="chatbox-ellipses"></ion-icon>
           {{provider.reviewCommentsCount}}
         </div>
@@ -55,5 +57,4 @@
       </ion-list>
     </ion-card-content>
   </ion-card>
-  <!-- <ion-button expand="block" (click)="selectProvider()">Pasirinkti</ion-button> -->
 </ion-content>

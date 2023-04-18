@@ -44,28 +44,28 @@ export class ProviderInfoComponent implements OnInit {
   }
 
   ngOnInit() {
-      this.apiService.get("provider/information").subscribe({
-        next: (response: any) => {
-          this.provider = response;
-          this.existingProvider = true;
-          this.existingBankAccount = this.provider.bankAccount != null;
-          this.provider.providerServices.forEach(service => {
-            this.selectedServices[service.id] = true;
-            const selectedService = services.filter(s => s.id == service.id)[0];
-            this.expandedCategories[selectedService.categoryId] = true;
-          });
-        },
-        error: (error: HttpErrorResponse) => {
-          if (error.status === 404) {
-            this.provider = {
-              description: "",
-              workingRange: 0,
-              basePricePerHour: 0,
-              providerServices: []
-            };
-          }
+    this.apiService.get("provider/information").subscribe({
+      next: (response: any) => {
+        this.provider = response;
+        this.existingProvider = true;
+        this.existingBankAccount = this.provider.bankAccount != null;
+        this.provider.providerServices.forEach(service => {
+          this.selectedServices[service.id] = true;
+          const selectedService = services.filter(s => s.id == service.id)[0];
+          this.expandedCategories[selectedService.categoryId] = true;
+        });
+      },
+      error: (error: HttpErrorResponse) => {
+        if (error.status === 404) {
+          this.provider = {
+            description: "",
+            workingRange: 0,
+            basePricePerHour: 0,
+            providerServices: []
+          };
         }
-      });
+      }
+    });
   }
 
   updateInformation() {
@@ -105,5 +105,12 @@ export class ProviderInfoComponent implements OnInit {
     });
 
     return await modal.present();
+  }
+
+  toggleCategoryServices(category: Category, event: Event) {
+    const servicesToBeToggled = services.filter(s => s.categoryId === category.id);
+    servicesToBeToggled.forEach(service => {
+      this.selectedServices[service.id] = (event as CustomEvent).detail.checked;
+    });
   }
 }
