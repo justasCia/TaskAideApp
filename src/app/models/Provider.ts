@@ -7,4 +7,5 @@ export default interface Provider extends User {
     rating?: number;
     reviewCount: number;
     reviewCommentsCount: number;
+    basePricePerHour: number;
 }

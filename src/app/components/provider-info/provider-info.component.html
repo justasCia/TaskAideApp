@@ -5,19 +5,23 @@
   <ion-card-content class="booking-form">
     <ion-item lines="none">
       <ion-label position="stacked">Aprašymas</ion-label>
-      <ion-textarea rows="5" [(ngModel)]="provider.description"></ion-textarea>
+      <ion-textarea rows="5" [(ngModel)]="provider.description" required></ion-textarea>
     </ion-item>
     <ion-item lines="none">
       <ion-label position="stacked">Vieta</ion-label>
       <app-location-input style="width: 100%;" [inputLocation]="provider.location" (location)="setAddress($event)"></app-location-input>
     </ion-item>
     <ion-item lines="none">
+      <ion-label position="stacked">Individualios veiklos numeris arba įmonės kodas</ion-label>
+      <ion-input required type="text" [(ngModel)]="provider.employmentNumberOrCompanyCode"></ion-input>
+    </ion-item>
+    <ion-item lines="none">
       <ion-label position="floating">Darbo atstumas, km</ion-label>
-      <ion-input type="number" min="0" [(ngModel)]="provider.workingRange"></ion-input>
+      <ion-input required type="number" min="0" [(ngModel)]="provider.workingRange"></ion-input>
     </ion-item>
     <ion-item lines="none">
       <ion-label position="floating">Bazinė kaina už valandą, </ion-label>
-      <ion-input type="number" min="0" [(ngModel)]="provider.basePricePerHour"></ion-input>
+      <ion-input required type="number" min="0" [(ngModel)]="provider.basePricePerHour"></ion-input>
     </ion-item>
       <ion-card class="ion-margin">
         <ion-card-header>
@@ -46,7 +50,7 @@
           </ion-item-group>
         </ion-card-content>
       </ion-card>
-    <ion-button expand="block" (click)="updateInformation()">Atnaujinti informaciją</ion-button>
+    <ion-button expand="block" disabled="{{!provider.location}}" (click)="updateInformation()">Atnaujinti informaciją</ion-button>
   </ion-card-content>
   <ion-card *ngIf="existingProvider">
     <ion-card-header>

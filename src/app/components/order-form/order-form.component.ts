@@ -17,6 +17,7 @@ export class OrderFormComponent implements OnInit {
 
   constructor(public orderFormService: OrderFormService, private ionLoaderService: IonLoaderService) { }
 
+
   selectCategory(category: Category) {
     this.orderFormService.selectCategory(category);
   }
@@ -50,6 +51,11 @@ export class OrderFormComponent implements OnInit {
     this.orderFormService.clear();
     this.successOrder = false;
   }
-  ngOnInit() { }
+  
+  ngOnInit() {
+    if (this.orderFormService.step == 5) {
+      this.startNewOrder();
+    }
+   }
 
 }

@@ -1,11 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ModalController } from '@ionic/angular';
-import { url } from 'inspector';
-import { Observable } from 'rxjs';
 import { translateBookingStatusToLithuanian } from 'src/app/helpers/orderStatusTranslator';
-import { User } from 'src/app/models/auth/User';
 import Order from 'src/app/models/Order';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
@@ -36,10 +32,6 @@ export class OrdersPage implements OnInit {
         this.ionLoaderService.load(false);
       }
     })
-    // this.apiService.get(url).subscribe((response: any) => {
-    //   this.orders = response;
-    //   this.ionLoaderService.load(false);
-    // });
   }
 
   getServices(booking: Order) {

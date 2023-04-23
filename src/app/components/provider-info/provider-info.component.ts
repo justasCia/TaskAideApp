@@ -16,6 +16,7 @@ interface Provider {
   basePricePerHour: number;
   providerServices: { id: number }[];
   bankAccount?: string;
+  employmentNumberOrCompanyCode?: string;
 }
 
 @Component({

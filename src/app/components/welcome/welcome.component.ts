@@ -14,13 +14,9 @@ export class WelcomeComponent implements OnInit {
   constructor(private authService: AuthService, private apiService: ApiService, private ionLoaderService: IonLoaderService) { }
 
   async ngOnInit() {
-    debugger;
-    if (this.authService.userValue) {
-      debugger;
+    const user = this.authService.userValue;
+    if (user) {
       this.loggedIn = true;
-    }
-    if (this.loggedIn) {
-      
     }
   }
 }

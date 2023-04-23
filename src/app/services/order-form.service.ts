@@ -24,7 +24,8 @@ export class OrderFormService {
   }
 
   selectServices(services: Service[]) {
-    this.selectedServices = services;
+    //this.selectedServices = services;
+    this.selectedServices = services.filter(s => s.categoryId == this.selectedCategory.id);
     this.step++;
   }
 
