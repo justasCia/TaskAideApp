@@ -14,7 +14,7 @@
         <p>
           <ng-container *ngIf="provider.reviewCount > 0">
             <ion-icon name="star" [style.color]="'#ffd700'"></ion-icon>
-            {{provider.rating}}/5
+            {{provider.rating | number : '1.0-2'}}/5
             <ion-icon name="person"></ion-icon>
             {{provider.reviewCount}}
             <ion-icon name="chatbox-ellipses"></ion-icon>

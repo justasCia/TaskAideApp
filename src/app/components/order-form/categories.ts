@@ -2,18 +2,18 @@ import Category from 'src/app/models/services/Category';
 import Service from 'src/app/models/services/Service';
 
 export const categories: Category[] = [
-  { id: 1, name: 'Valymas', imageUrl: 'https://d3cl79h6n1fe0x.cloudfront.net/wp-content/uploads/2020/01/15085115/11.jpeg'},
-  { id: 2, name: 'Elektros darbai', imageUrl: 'https://d3cl79h6n1fe0x.cloudfront.net/wp-content/uploads/2020/01/15085115/11.jpeg'},
-  { id: 3, name: 'Santechnikos darbai', imageUrl: 'https://d3cl79h6n1fe0x.cloudfront.net/wp-content/uploads/2020/01/15085115/11.jpeg'},
-  { id: 4, name: 'Statybos darbai', imageUrl: 'https://d3cl79h6n1fe0x.cloudfront.net/wp-content/uploads/2020/01/15085115/11.jpeg'},
-  { id: 5, name: 'Buitinės technikos pajungimas', imageUrl: 'https://d3cl79h6n1fe0x.cloudfront.net/wp-content/uploads/2020/01/15085115/11.jpeg'},
-  { id: 6, name: 'Vidaus apdailos darbai', imageUrl: 'https://d3cl79h6n1fe0x.cloudfront.net/wp-content/uploads/2020/01/15085115/11.jpeg'},
-  { id: 7, name: 'Baldų surinkimas', imageUrl: 'https://d3cl79h6n1fe0x.cloudfront.net/wp-content/uploads/2020/01/15085115/11.jpeg'},
-  { id: 8, name: 'Pervežimas', imageUrl: 'https://d3cl79h6n1fe0x.cloudfront.net/wp-content/uploads/2020/01/15085115/11.jpeg'},
-  { id: 9, name: 'Aplinkos tvarkymas ir priežiūra', imageUrl: 'https://d3cl79h6n1fe0x.cloudfront.net/wp-content/uploads/2020/01/15085115/11.jpeg'},
-  { id: 10, name: 'Kondicionavimo sistemų bei vėdinimo sistemų darbai', imageUrl: 'https://d3cl79h6n1fe0x.cloudfront.net/wp-content/uploads/2020/01/15085115/11.jpeg'},
-  { id: 11, name: 'Apsaugos darbai', imageUrl: 'https://d3cl79h6n1fe0x.cloudfront.net/wp-content/uploads/2020/01/15085115/11.jpeg'},
-  { id: 12, name: 'Dujų ūkio darbai', imageUrl: 'https://d3cl79h6n1fe0x.cloudfront.net/wp-content/uploads/2020/01/15085115/11.jpeg'},
+  { id: 1, name: 'Valymas', imageUrl: 'https://t3.ftcdn.net/jpg/02/30/46/42/240_F_230464218_WsWoWtbFitehDJpi3OkK1ZMOTqdbGp3c.jpg'},
+  { id: 2, name: 'Elektros darbai', imageUrl: 'https://t4.ftcdn.net/jpg/01/70/17/97/240_F_170179753_piUSFjn4xlwAKaIU14gs6FnCVij2wckc.jpg'},
+  { id: 3, name: 'Santechnikos darbai', imageUrl: 'https://t4.ftcdn.net/jpg/02/16/28/29/240_F_216282910_yjxZDV8zDD2FaaBzxaQcNBhFMnmpuoFj.jpg'},
+  { id: 4, name: 'Statybos darbai', imageUrl: 'https://t3.ftcdn.net/jpg/02/90/51/26/240_F_290512663_zep6YJ0mCgnlJY2tE8ooPVNP6xhEu0Gk.jpg'},
+  { id: 5, name: 'Buitinės technikos pajungimas', imageUrl: 'https://t4.ftcdn.net/jpg/03/12/23/07/240_F_312230725_HDCTBEXE7g1c6sBFWdcnQJOzdhSQQkTX.jpg'},
+  { id: 6, name: 'Vidaus apdailos darbai', imageUrl: 'https://t4.ftcdn.net/jpg/03/28/75/29/240_F_328752924_b2GuZzirAqIlpqLUuuUKLBjKcT87IDFj.jpg'},
+  { id: 7, name: 'Baldų surinkimas', imageUrl: 'https://t4.ftcdn.net/jpg/02/33/49/67/240_F_233496733_vNlSvxuuLriXSM3L78HW7fNP3pJkl4sW.jpg'},
+  { id: 8, name: 'Pervežimas', imageUrl: 'https://t4.ftcdn.net/jpg/04/28/47/97/240_F_428479723_yecIfKly5jdoEMFQvfEekQeQ2EaKjuMX.jpg'},
+  { id: 9, name: 'Aplinkos tvarkymas ir priežiūra', imageUrl: 'https://t3.ftcdn.net/jpg/03/67/35/14/240_F_367351493_qvbw37oVKGJwi8jZgFWDAeyC7uRLuZfa.jpg'},
+  { id: 10, name: 'Kondicionavimo sistemų bei vėdinimo sistemų darbai', imageUrl: 'https://t3.ftcdn.net/jpg/02/41/53/46/240_F_241534624_XwkSunMF8A9l2rQnWvxhCDwI4BvH3D5Q.jpg'},
+  { id: 11, name: 'Apsaugos darbai', imageUrl: 'https://t4.ftcdn.net/jpg/02/19/09/69/240_F_219096975_C4t7pSztzGuCCQxiyZpwKIK8L7Moewlg.jpg'},
+  { id: 12, name: 'Dujų ūkio darbai', imageUrl: 'https://t3.ftcdn.net/jpg/04/81/82/12/240_F_481821291_I1e0FeSDsETwJkHPB599a71lnZmzsMya.jpg'},
 ];
 
 export const services: Service[] = [

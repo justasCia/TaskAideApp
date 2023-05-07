@@ -17,7 +17,7 @@
             <h1>Užsakovas:</h1>
             <h2>{{order.client.firstName}} {{order.client.lastName}}</h2>
             <h3>{{order.client.email}}</h3>
-            <h3>{{order.client.phoneNumber}}</h3>
+            <h3>+370{{order.client.phoneNumber}}</h3>
           </ion-col>
           <ion-col sizeSm="12" sizeMd="6">
             <h1>Teikėjas:</h1>
@@ -27,12 +27,12 @@
               <ng-template #company>{{order.provider.companyName}}</ng-template>
             </h2>
             <h3>{{order.provider.email}}</h3>
-            <h3>{{order.provider.phoneNumber}}</h3>
+            <h3>+370{{order.provider.phoneNumber}}</h3>
             <ng-container *ngIf="order.worker">
               <h1>Paskirtas darbuotojas:</h1>
               <h2>{{ order.worker.firstName }} {{order.worker.lastName }}</h2>
               <h3>{{order.worker.email}}</h3>
-              <h3>{{order.worker.phoneNumber}}</h3>
+              <h3>+370{{order.worker.phoneNumber}}</h3>
             </ng-container>
           </ion-col>
         </ion-row>
@@ -136,21 +136,21 @@
           </ion-col>
         </ion-row>
         <ng-container *ngIf="providerLooking; else providerNotLooking" [ngSwitch]="order.status">
-          <ion-row *ngSwitchCase="'Pending'">
-            <ion-col size="12">
+          <ion-row *ngSwitchCase="'Pending'" class="ion-justify-content-center">
+            <ion-col size="6" class="ion-text-center">
               <ion-button [routerLink]="['/orders', order.id, 'edit']">Pasiūlyti kainą</ion-button>
-              <ion-button (click)="reject()">Atmesti</ion-button>
+              <ion-button color="danger" (click)="reject()">Atmesti</ion-button>
             </ion-col>
           </ion-row>
-          <ion-row *ngSwitchCase="'InNegotiation'">
-            <ion-col>
+          <ion-row *ngSwitchCase="'InNegotiation'" class="ion-justify-content-center">
+            <ion-col size="6" class="ion-text-center">
               <ion-button [routerLink]="['/orders', order.id, 'edit']">Pasiūlyti kainą</ion-button>
             </ion-col>
           </ion-row>
-          <ion-row *ngSwitchCase="'Confirmed'">
-            <ion-col>
+          <ion-row *ngSwitchCase="'Confirmed'" class="ion-justify-content-center">
+            <ion-col size="6" class="ion-text-center">
               <ion-button [routerLink]="['/orders', order.id, 'edit']">Užbaigti darbą</ion-button>
-              <ion-button (click)="openCancelOrderModal()">Atšaukti darbą</ion-button>
+              <ion-button color="danger" (click)="openCancelOrderModal()">Atšaukti darbą</ion-button>
             </ion-col>
           </ion-row>
         </ng-container>
@@ -165,11 +165,9 @@
           </ion-row>
           <ion-row *ngIf="(order.status == 'Completed' || order.status == 'CancelledWithPartialPayment')"
             class="ion-justify-content-center">
-            <ion-col size="6" class="ion-text-center" *ngIf="!order.paid">
-              <ion-button (click)="payOrder()">Apmokėti</ion-button>
-            </ion-col>
-            <ion-col size="6" class="ion-text-center" *ngIf="!order.review">
-              <ion-button (click)="openAddReviewModal()">Pridėti įvertinimą</ion-button>
+            <ion-col size="6" class="ion-text-center">
+              <ion-button *ngIf="!order.paid" (click)="payOrder()">Apmokėti</ion-button>
+              <ion-button *ngIf="!order.review" (click)="openAddReviewModal()">Pridėti įvertinimą</ion-button>
             </ion-col>
           </ion-row>
         </ng-template>

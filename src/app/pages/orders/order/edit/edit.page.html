@@ -137,7 +137,7 @@
                 </ion-row>
                 <ion-row *ngIf="order.status == 'Pending'">
                   <ion-col>
-                    <ion-button (click)="sendOrUpdateOffer()">Pasiūlyti salygas</ion-button>
+                    <ion-button (click)="sendOrUpdateOffer()">Pasiūlyti sąlygas</ion-button>
                   </ion-col>
                 </ion-row>
                 <ion-row *ngIf="order.status == 'InNegotiation'">
@@ -147,10 +147,10 @@
                 </ion-row>
                 <ion-row *ngIf="order.status == 'Confirmed'">
                   <ion-col *ngIf="!cancelWithPartialPayment">
-                    <ion-button (click)="sendBill()">Užbaigti darbą ir siūsti sąskaitą</ion-button>
+                    <ion-button (click)="sendBill()">Užbaigti darbą</ion-button>
                   </ion-col>
                   <ion-col *ngIf="cancelWithPartialPayment">
-                    <ion-button (click)="sendBill()">Siūsti dalinio mokėjimo sąskaitą</ion-button>
+                    <ion-button (click)="sendBill()">Atšaukti su daliniu mokėjimuą</ion-button>
                   </ion-col>
                 </ion-row>
               </ng-container>

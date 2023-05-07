@@ -49,7 +49,7 @@ const routes: Routes = [
   },
   {
     path: 'report',
-    canActivate: [UserAuthenticatedGuard, ProviderGuard],
+    canActivate: [UserAuthenticatedGuard],
     loadChildren: () => import('./pages/provider-report/provider-report.module').then( m => m.ProviderReportPageModule)
   },
   {

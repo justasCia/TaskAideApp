@@ -1,7 +1,7 @@
 export function translateBookingStatusToLithuanian(status: string): string {
     switch(status.toLowerCase()) {
       case 'pending':
-        return "Laukiama";
+        return "Pateiktas";
       case 'rejected':
         return "Atmesta";
       case 'innegotiation':
@@ -13,7 +13,7 @@ export function translateBookingStatusToLithuanian(status: string): string {
       case 'cancelledwithpartialpayment':
         return "Atšaukta su daliniu mokėjimu";
       case 'completed':
-        return "Įvykdyta";
+        return "Užbaigtas";
       default:
         throw new Error(`Unknown booking status: ${status}`);
     }

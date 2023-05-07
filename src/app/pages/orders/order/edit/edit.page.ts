@@ -86,7 +86,7 @@ export class EditPage implements OnInit {
         this.apiService.put(`Bookings/${this.orderId}/materialPrices`, this.order.materialPrices).subscribe(responseOrder => {
           this.apiService.put(`Bookings/${this.orderId}/status`, "InNegotiation").subscribe(responseOrder => {
             this.ionLoaderService.load(false);
-            this.ionToastService.showSuccess("Pasiųlymas klientui išsiųstas");
+            this.ionToastService.showSuccess("Pasiūlymas klientui išsiųstas");
             this.router.navigate([`/orders/${this.orderId}`]);
           })
         })
@@ -114,7 +114,7 @@ export class EditPage implements OnInit {
           this.apiService.put(`Bookings/${this.orderId}/status`, status).subscribe(responseOrder => {
             this.ionLoaderService.load(false);
             const toastMessageStatus = this.cancelWithPartialPayment ? 'atšauktas su daliniu mokėjimu' : 'atliktas'
-            this.ionToastService.showSuccess(`Darbas pažymėtas kaip ${toastMessageStatus}, sąskaita klientui išsiųsta`);
+            this.ionToastService.showSuccess(`Darbas sėkmingai pažymėtas kaip ${toastMessageStatus}.`);
             this.router.navigate([`/orders/${this.orderId}`]);
           })
         })
