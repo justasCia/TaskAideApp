@@ -10,8 +10,8 @@ export class ClientSidebarListComponent implements OnInit {
   public appPages = [
     { title: 'Pagrindinis puslapis', url: '/', icon: 'home' },
     { title: 'Užsakyti paslaugas', url: '/order-services', icon: 'cart' },
-    { title: 'Užsakytos paslaugos', url: '/orders', icon: 'calendar' },
-    { title: 'Neapmokėtos paslaugos',  url: '/orders', queryParams: { status: "done", paid: false }, icon: 'barcode' },
+    { title: 'Mano užsakymai', url: '/orders', icon: 'calendar' },
+    { title: 'Neapmokėti užsakymai',  url: '/orders', queryParams: { status: "done", paid: false }, icon: 'barcode' },
   ];
   constructor() { }
 

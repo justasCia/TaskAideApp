@@ -17,9 +17,8 @@
                   <ion-label position="floating">Slaptažodis</ion-label>
                   <ion-input [(ngModel)]="login.password" name="password" type="password"></ion-input>
                 </ion-item>
-                <ion-row class="ion-justify-content-center">
+                <ion-row class="ion-margin-vertical">
                   <ion-col sizeLg="6">
-                    <ion-button color="dark" fill="clear" size="full">Pamiršau slaptažodį</ion-button>
                   </ion-col>
                 </ion-row>
                 <ion-row class="ion-justify-content-center">
@@ -33,19 +32,8 @@
                   </ion-col>
                 </ion-row>
                 <ion-row class="ion-justify-content-center">
-                  <p>Arba prisijunkite su:</p>
-                </ion-row>
-                <ion-row class="ion-justify-content-center">
-                    <ion-button size="large" fill="clear">
-                      <ion-icon class="google" slot="icon-only" name="logo-google"></ion-icon>
-                    </ion-button>
-                    <ion-button size="large" fill="clear">
-                      <ion-icon class="facebook" slot="icon-only" name="logo-facebook"></ion-icon>
-                    </ion-button>
-                </ion-row>
-                <ion-row class="ion-justify-content-center">
                   <ion-col sizeLg="6">
-                    <ion-button color="primarry" fill="clear" size="full">Registruotis</ion-button>
+                    <ion-button  [routerLink]="['/register']" color="primarry" fill="clear" size="full">Registruotis</ion-button>
                   </ion-col>
                 </ion-row>
               </form>

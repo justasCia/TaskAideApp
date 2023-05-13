@@ -1,6 +1,6 @@
 <ion-list>
   <ion-radio-group [(ngModel)]="selectedProvider">
-    <div class="error-message" *ngIf="providers && providers.length == 0">Nerasta tiekėjų pagal jūsų reikalavimus.</div>
+    <div class="error-message" *ngIf="providers && providers.length == 0">Nerasta teikėjų pagal jūsų reikalavimus.</div>
     <ion-item *ngFor="let provider of providers" (click)="selectProvider(provider)" lines="none">
       <ion-label>
         <h2>

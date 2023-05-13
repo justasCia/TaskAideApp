@@ -10,29 +10,29 @@ export class WorkerSidebarListComponent implements OnInit {
   @Input() role: string;
   public providerPages = [
     { title: 'Pagrindinis puslapis', url: '/', icon: 'home' },
-    { title: 'Paslaugų užklausos', url: '/orders', queryParams: { status: "pending" }, icon: 'contract' },
+    { title: 'Užsakymų užklausos', url: '/orders', queryParams: { status: "pending" }, icon: 'contract' },
     { title: 'Užsakymai derybų stadijoje', url: '/orders', queryParams: { status: "inNegotiation" }, icon: 'chatbubbles' },
-    { title: 'Vykdomi darbai', url: '/orders', queryParams: { status: "confirmed" }, icon: 'clipboard' },
-    { title: 'Visi darbai', url: '/orders', icon: 'list' },
+    { title: 'Vykdomi užsakymai', url: '/orders', queryParams: { status: "confirmed" }, icon: 'clipboard' },
+    { title: 'Visi užsakymai', url: '/orders', icon: 'list' },
     { title: 'Ataskaita', url: '/report', icon: 'barcode' },
   ]
 
   public companyPages = [
     { title: 'Pagrindinis puslapis', url: '/', icon: 'home' },
-    { title: 'Paslaugų užklausos', url: '/orders', queryParams: { status: "pending" }, icon: 'contract' },
+    { title: 'Užsakymų užklausos', url: '/orders', queryParams: { status: "pending" }, icon: 'contract' },
     { title: 'Užsakymai derbybų stadijoje', url: '/orders', queryParams: { status: "inNegotiation" }, icon: 'chatbubbles' },
-    { title: 'Vykdomi darbai', url: '/orders', queryParams: { status: "confirmed" }, icon: 'clipboard' },
-    { title: 'Visi darbai', url: '/orders', icon: 'list' },
+    { title: 'Vykdomi užsakymai', url: '/orders', queryParams: { status: "confirmed" }, icon: 'clipboard' },
+    { title: 'Visi užsakymai', url: '/orders', icon: 'list' },
     { title: 'Ataskaita', url: '/report', icon: 'barcode' },
     { title: 'Darbuotojai', url: '/workers', icon: 'people' },
   ]
 
   public companyWorkerPages = [
     { title: 'Pagrindinis puslapis', url: '/', icon: 'home' },
-    { title: 'Priskirtos paslaugų užklausos', url: '/orders', queryParams: { status: "pending" }, icon: 'contract' },
-    { title: 'Priskirtoi Užsakymai derbybų stadijoje', url: '/orders', queryParams: { status: "inNegotiation" }, icon: 'chatbubbles' },
-    { title: 'Priskirti vykdomi darbai', url: '/orders', queryParams: { status: "confirmed" }, icon: 'clipboard' },
-    { title: 'Visi priskirti darbai', url: '/orders', icon: 'list' },
+    { title: 'Priskirtos užsakymų užklausos', url: '/orders', queryParams: { status: "pending" }, icon: 'contract' },
+    { title: 'Priskirti užsakymai derbybų stadijoje', url: '/orders', queryParams: { status: "inNegotiation" }, icon: 'chatbubbles' },
+    { title: 'Priskirti vykdomi užsakymai', url: '/orders', queryParams: { status: "confirmed" }, icon: 'clipboard' },
+    { title: 'Visi priskirti užsakymai', url: '/orders', icon: 'list' },
     { title: 'Ataskaita', url: '/worker-report', icon: 'barcode' },
   ]
   public appPages: { title: string, url: string, queryParams?: any, icon: string }[] = [];
