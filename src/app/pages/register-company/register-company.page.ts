@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Register } from 'src/app/models/auth/Register';
 import { RegisterCompany } from 'src/app/models/auth/RegisterCompany';
 import { AuthService } from 'src/app/services/auth.service';
 import { IonLoaderService } from 'src/app/services/ion-loader.service';
@@ -15,8 +14,8 @@ export class RegisterCompanyPage implements OnInit {
     email: '',
     phoneNumber: '',
     password: '',
-    //repeatPassword: ''
-  }
+  };
+  error = false;
   
   constructor(private authService: AuthService, private ionLoaderService: IonLoaderService) { }
 
@@ -33,6 +32,7 @@ export class RegisterCompanyPage implements OnInit {
       },
       error: error => {
         console.log(error);
+        this.error = true;
         this.ionLoaderService.load(false);
       }
     })

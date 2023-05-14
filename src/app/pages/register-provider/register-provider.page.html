@@ -56,6 +56,11 @@
                     <ion-button type="submit" color="primary" size="full">Registruotis</ion-button>
                   </ion-col>
                 </ion-row>
+                <ion-row *ngIf="error" class="ion-justify-content-center error">
+                  <ion-col sizeLg="6" class="ion-text-center">
+                    <div>Nepavyko prisiregistruoti</div>
+                  </ion-col>
+                </ion-row>
               </form>
             </ion-card-content>
           </ion-card>

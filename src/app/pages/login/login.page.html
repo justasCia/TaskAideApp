@@ -26,9 +26,9 @@
                     <ion-button type="submit" color="primary" size="full">Prisijungti</ion-button>
                   </ion-col>
                 </ion-row>
-                <ion-row *ngIf="error" class="ion-justify-content-center">
-                  <ion-col sizeLg="6">
-                    <div>{{error}}</div>
+                <ion-row *ngIf="error" class="ion-justify-content-center error">
+                  <ion-col sizeLg="6" class="ion-text-center">
+                    <div>Nepavyko prisijungti</div>
                   </ion-col>
                 </ion-row>
                 <ion-row class="ion-justify-content-center">

@@ -15,8 +15,8 @@ export class RegisterProviderPage implements OnInit {
     email: '',
     phoneNumber: '',
     password: '',
-    //repeatPassword: ''
-  }
+  };
+  error = false;
   
   constructor(private authService: AuthService, private ionLoaderService: IonLoaderService) { }
 
@@ -33,6 +33,7 @@ export class RegisterProviderPage implements OnInit {
       },
       error: error => {
         console.log(error);
+        this.error = true;
         this.ionLoaderService.load(false);
       }
     })
